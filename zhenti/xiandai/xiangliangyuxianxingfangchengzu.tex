@@ -1,0 +1,241 @@
+% --- 题目 ---
+\problem[P158-5 (23-2,3)]{已知线性方程组}
+\[ \begin{cases} ax_1 + x_3 = 1, \\ x_1 + ax_2 + x_3 = 0, \\ x_1 + 2x_2 + ax_3 = 0, \\ ax_1 + bx_2 = 2 \end{cases} \]
+{有解, 其中 $\displaystyle a, b$ 为常数. 若 $\displaystyle \begin{vmatrix} a & 0 & 1 \\ 1 & a & 1 \\ 1 & 2 & a \end{vmatrix} = 4$, 则 $\displaystyle \begin{vmatrix} 1 & a & 1 \\ 1 & 2 & a \\ a & b & 0 \end{vmatrix} = \underline{\hspace{4em}}. $}
+\ansat{328；【十年真题】 - 考点一：线性方程组的解的情况及求解 - 5}
+
+% --- 题目 ---
+\problem[P159-1 (18-1,2,3)]{已知 $\displaystyle a$ 是常数, 且矩阵 $\displaystyle \bm{A} = \begin{pmatrix} 1 & 2 & a \\ 1 & 3 & 0 \\ 2 & 7 & -a \end{pmatrix}$ 可经初等列变换化为矩阵 $\displaystyle \bm{B} = \begin{pmatrix} 1 & a & 2 \\ 0 & 1 & 1 \\ -1 & 1 & 1 \end{pmatrix}.$}
+\begin{enumerate}
+\item[(1)] 求 $\displaystyle a$;
+\item[(2)] 求满足 $\displaystyle \bm{AP} = \bm{B}$ 的可逆矩阵 $\displaystyle \bm{P}$.
+\end{enumerate}
+\ansat{328；【十年真题】 - 考点二：矩阵方程组的解的情况及求解 - 1}
+\vspace{8em}
+
+% --- 题目 ---
+\problem[P159-2 (16-1)]{设矩阵
+\[ \bm{A} = \begin{pmatrix} 1 & -1 & -1 \\ 2 & a & 1 \\ -1 & 1 & a \end{pmatrix}, \bm{B} = \begin{pmatrix} 2 & 2 \\ 1 & a \\ -a-1 & -2 \end{pmatrix}, \]
+当 $\displaystyle a$ 为何值时, 方程 $\displaystyle \bm{AX} = \bm{B}$ 无解、有唯一解、有无穷多解?
+在有解时, 求解此方程.}
+\ansat{328；【十年真题】 - 考点二：矩阵方程组的解的情况及求解 - 2}
+
+% --- 题目 ---
+\problem[P160-变式 (04-1)]{设有齐次线性方程组
+\[ \begin{cases}
+(1+a)x_1 + x_2 + \cdots + x_n = 0, \\
+2x_1 + (2+a)x_2 + \cdots + 2x_n = 0, \\
+\vdots \\
+nx_1 + nx_2 + \cdots + (n+a)x_n = 0
+\end{cases} (n \ge 2), \]
+试问 $\displaystyle a$ 为何值时, 该方程组有非零解, 并求出其通解.}
+\ansat{329；【方法探究】 - 考点一：线性方程组的解的情况及求解 - 变式}
+
+% --- 题目 ---
+\problem[P161-3 (98-3)]{齐次线性方程组}
+\[ \begin{cases} \lambda x_1 + x_2 + \lambda^2 x_3 = 0, \\ x_1 + \lambda x_2 + x_3 = 0, \\ x_1 + x_2 + \lambda x_3 = 0 \end{cases} \]
+{的系数矩阵记为 $\displaystyle \bm{A}$. 若存在 3 阶矩阵 $\displaystyle \bm{B} \neq \bm{O}$ 使得 $\displaystyle \bm{AB} = \bm{O}$, 则 ( \quad )}
+\begin{tasks}(2)
+  \task $\displaystyle \lambda = -2$ 且 $\displaystyle |\bm{B}| = 0$.
+  \task $\displaystyle \lambda = -2$ 且 $\displaystyle |\bm{B}| \neq 0$.
+  \task $\displaystyle \lambda = 1$ 且 $\displaystyle |\bm{B}| = 0$.
+  \task $\displaystyle \lambda = 1$ 且 $\displaystyle |\bm{B}| \neq 0$.
+\end{tasks}
+\ansat{330；【真题精选】 - 考点一：线性方程组的解的情况及求解 - 3}
+\vspace{6em}
+
+% --- 题目 ---
+\problem[P162-8 (00-2)]{设 $\displaystyle \bm{\alpha} = \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}, \ \bm{\beta} = \begin{pmatrix} 1 \\ \frac{1}{2} \\ 0 \end{pmatrix}, \ \bm{\gamma} = \begin{pmatrix} 0 \\ 0 \\ 8 \end{pmatrix}, \bm{A} = \bm{\alpha}\bm{\beta}^{\mathrm{T}}, \bm{B} = \bm{\beta}^{\mathrm{T}}\bm{\alpha}.$
+\\
+其中 $\displaystyle \bm{\beta}^{\mathrm{T}}$ 是 $\displaystyle \bm{\beta}$ 的转置, 求解方程
+\\
+$$2\bm{B}^2 \bm{A}^2 \bm{x} = \bm{A}^4 \bm{x} + \bm{B}^4 \bm{x} + \bm{\gamma}.$$
+}
+\ansat{331；【真题精选】 - 考点一：线性方程组的解的情况及求解 - 8}
+
+% --- 题目 ---
+\problem[P162-1 (15-2,3)]{设矩阵 $\displaystyle \bm{A} = \begin{pmatrix} a & 1 & 0 \\ 1 & a & -1 \\ 0 & 1 & a \end{pmatrix}$, 且 $\displaystyle \bm{A}^3 = \bm{O}$.}
+\begin{enumerate}
+\item[(1)] 求 $\displaystyle a$ 的值;
+\item[(2)] 若矩阵 $\displaystyle \bm{X}$ 满足 $\displaystyle \bm{X} - \bm{XA}^2 - \bm{AX} + \bm{AXA}^2 = \bm{E}$, 其中 $\displaystyle \bm{E}$ 为 3 阶单位矩阵, 求 $\displaystyle \bm{X}$.
+\end{enumerate}
+\ansat{332；【真题精选】 - 考点二：矩阵方程组的解的情况及求解 - 1}
+
+% --- 题目 ---
+\problem[P162-2 (14-1,2,3)]{设矩阵 $\displaystyle \bm{A} = \begin{pmatrix} 1 & -2 & 3 & -4 \\ 0 & 1 & -1 & 1 \\ 1 & 2 & 0 & -3 \end{pmatrix}, \bm{E}$ 为 3 阶单位矩阵.}
+\begin{enumerate}
+\item[(1)] 求方程组 $\displaystyle \bm{Ax} = \bm{0}$ 的一个基础解系;
+\item[(2)] 求满足 $\displaystyle \bm{AB} = \bm{E}$ 的所有矩阵 $\displaystyle \bm{B}$.
+\end{enumerate}
+\ansat{332；【真题精选】 - 考点二：矩阵方程组的解的情况及求解 - 2}
+
+% --- 题目 ---
+\problem[P163-2 (23-1)]{已知 $\displaystyle n$ 阶矩阵 $\displaystyle \bm{A}, \bm{B}, \bm{C}$ 满足 $\displaystyle \bm{ABC} = \bm{O}, \bm{E}$ 为 $\displaystyle n$ 阶单位矩阵. 记矩阵
+$$ 
+\begin{pmatrix} \bm{O} & \bm{A} \\ \bm{BC} & \bm{E} \end{pmatrix}, \; \begin{pmatrix} \bm{AB} & \bm{C} \\ \bm{O} & \bm{E} \end{pmatrix}, \; \begin{pmatrix} \bm{E} & \bm{AB} \\ \bm{AB} & \bm{O} \end{pmatrix}
+$$ 
+的秩分别为 $\displaystyle r_1, r_2, r_3$, 则 ( \quad )}
+\begin{tasks}(2)
+  \task $\displaystyle r_1 \le r_2 \le r_3.$
+  \task $\displaystyle r_1 \le r_3 \le r_2.$
+  \task $\displaystyle r_3 \le r_1 \le r_2.$
+  \task $\displaystyle r_2 \le r_1 \le r_3.$
+\end{tasks}
+\ansat{333；【十年真题】 - 考点：向量组的线性相关性、线性表示及秩 - 2}
+
+% --- 题目 ---
+\problem[P164-4 (22-1,2,3)]{设}
+\[ \bm{\alpha}_1 = \begin{pmatrix} \lambda \\ 1 \\ 1 \end{pmatrix}, \ \bm{\alpha}_2 = \begin{pmatrix} 1 \\ \lambda \\ 1 \end{pmatrix}, \ \bm{\alpha}_3 = \begin{pmatrix} 1 \\ 1 \\ \lambda \end{pmatrix}, \ \bm{\alpha}_4 = \begin{pmatrix} 1 \\ \lambda \\ \lambda^2 \end{pmatrix}. \]
+{若向量组 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_3$ 与 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_4$ 等价, 则 $\displaystyle \lambda$ 的取值范围是 ( \quad )}
+\begin{tasks}(2)
+  \task $\displaystyle \{0, 1\}.$
+  \task $\displaystyle \{\lambda | \lambda \in \mathbb{R}, \lambda \neq -2\}.$
+  \task $\displaystyle \{\lambda | \lambda \in \mathbb{R}, \lambda \neq -1, \lambda \neq -2\}.$
+  \task $\displaystyle \{\lambda | \lambda \in \mathbb{R}, \lambda \neq -1\}.$
+\end{tasks}
+\ansat{333；【十年真题】 - 考点：向量组的线性相关性、线性表示及秩 - 4}
+
+% --- 题目 ---
+\problem[P164-5 (21-1)]{已知 $\displaystyle \bm{\alpha}_1 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \bm{\alpha}_2 = \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}, \bm{\alpha}_3 = \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}$, 记 $\displaystyle \bm{\beta}_1 = \bm{\alpha}_1, \ \bm{\beta}_2 = \bm{\alpha}_2 - k\bm{\beta}_1, \ \bm{\beta}_3 = \bm{\alpha}_3 - l_1\bm{\beta}_1 - l_2\bm{\beta}_2$. 若 $\displaystyle \bm{\beta}_1, \ \bm{\beta}_2, \ \bm{\beta}_3$ 两两正交, 则 $\displaystyle l_1, l_2$ 依次为 ( \quad )}
+\begin{tasks}(2)
+  \task $\displaystyle \frac{5}{2}, \frac{1}{2}.$
+  \task $\displaystyle -\frac{5}{2}, \frac{1}{2}.$
+  \task $\displaystyle \frac{5}{2}, -\frac{1}{2}.$
+  \task $\displaystyle -\frac{5}{2}, -\frac{1}{2}.$
+\end{tasks}
+\ansat{333；【十年真题】 - 考点：向量组的线性相关性、线性表示及秩 - 5}
+
+% --- 题目 ---
+\problem[P168-4 (06-1,2,3)]{设 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \dots, \bm{\alpha}_s$ 均为 $\displaystyle n$ 维列向量, $\displaystyle \bm{A}$ 是 $\displaystyle m \times n$ 矩阵, 下列选项正确的是 ( \quad )}
+\begin{tasks}(1)
+  \task 若 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \dots, \bm{\alpha}_s$ 线性相关, 则 $\displaystyle \bm{A}\bm{\alpha}_1, \bm{A}\bm{\alpha}_2, \dots, \bm{A}\bm{\alpha}_s$ 线性相关.
+  \task 若 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \dots, \bm{\alpha}_s$ 线性相关, 则 $\displaystyle \bm{A}\bm{\alpha}_1, \bm{A}\bm{\alpha}_2, \dots, \bm{A}\bm{\alpha}_s$ 线性无关.
+  \task 若 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \dots, \bm{\alpha}_s$ 线性无关, 则 $\displaystyle \bm{A}\bm{\alpha}_1, \bm{A}\bm{\alpha}_2, \dots, \bm{A}\bm{\alpha}_s$ 线性相关.
+  \task 若 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \dots, \bm{\alpha}_s$ 线性无关, 则 $\displaystyle \bm{A}\bm{\alpha}_1, \bm{A}\bm{\alpha}_2, \dots, \bm{A}\bm{\alpha}_s$ 线性无关.
+\end{tasks}
+\ansat{335；【真题精选】 - 考点：向量组的线性相关性、线性表示及秩 - 4}
+\vspace{8em}
+
+% --- 题目 ---
+\problem[P170-2 (25-2)]{设 3 阶矩阵 $\displaystyle \bm{A}, \bm{B}$ 满足 $\displaystyle r(\bm{AB}) = r(\bm{BA}) + 1$, 则 ( \quad )}
+\begin{tasks}(1)
+  \task 方程组 $\displaystyle (\bm{A} + \bm{B})\bm{x} = \bm{0}$ 只有零解.
+  \task 方程组 $\displaystyle \bm{A}\bm{x} = \bm{0}$ 与方程组 $\displaystyle \bm{B}\bm{x} = \bm{0}$ 均只有零解.
+  \task 方程组 $\displaystyle \bm{A}\bm{x} = \bm{0}$ 与方程组 $\displaystyle \bm{B}\bm{x} = \bm{0}$ 没有公共非零解.
+  \task 方程组 $\displaystyle \bm{ABA}\bm{x} = \bm{0}$ 与方程组 $\displaystyle \bm{BAB}\bm{x} = \bm{0}$ 有公共非零解.
+\end{tasks}
+\ansat{336；【十年真题】 - 考点：线性方程组的解的结构 - 2}
+
+% --- 题目 ---
+\problem[P170-3 (22-1)]{设 $\displaystyle \bm{A}, \bm{B}$ 为 $\displaystyle n$ 阶矩阵, $\displaystyle \bm{E}$ 为单位矩阵. 若方程组 $\displaystyle \bm{Ax} = \bm{0}$ 与 $\displaystyle \bm{Bx} = \bm{0}$ 同解, 则 ( \quad )}
+\begin{tasks}(1)
+  \task 方程组 $\displaystyle \begin{pmatrix} \bm{A} & \bm{O} \\ \bm{E} & \bm{B} \end{pmatrix} \bm{y} = \bm{0}$ 只有零解.
+  \task 方程组 $\displaystyle \begin{pmatrix} \bm{E} & \bm{A} \\ \bm{O} & \bm{AB} \end{pmatrix} \bm{y} = \bm{0}$ 只有零解.
+  \task 方程组 $\displaystyle \begin{pmatrix} \bm{A} & \bm{B} \\ \bm{O} & \bm{B} \end{pmatrix} \bm{y} = \bm{0}$ 与 $\displaystyle \begin{pmatrix} \bm{B} & \bm{A} \\ \bm{O} & \bm{A} \end{pmatrix} \bm{y} = \bm{0}$ 同解.
+  \task 方程组 $\displaystyle \begin{pmatrix} \bm{AB} & \bm{B} \\ \bm{O} & \bm{A} \end{pmatrix} \bm{y} = \bm{0}$ 与 $\displaystyle \begin{pmatrix} \bm{BA} & \bm{A} \\ \bm{O} & \bm{B} \end{pmatrix} \bm{y} = \bm{0}$ 同解.
+\end{tasks}
+\ansat{336；【十年真题】 - 考点：线性方程组的解的结构 - 3}
+
+% --- 题目 ---
+\problem[P170-4 (21-2)]{设 3 阶矩阵 $\displaystyle \bm{A}=(\bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_3), \ \bm{B}=(\bm{\beta}_1, \bm{\beta}_2, \bm{\beta}_3)$. 若向量组 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_3$ 可以由向量组 $\displaystyle \bm{\beta}_1, \bm{\beta}_2, \bm{\beta}_3$ 线性表出, 则 ( \quad )}
+\begin{tasks}(2)
+  \task $\displaystyle \bm{A}\bm{x}=\bm{0}$ 的解均为 $\displaystyle \bm{Bx}=\bm{0}$ 的解.
+  \task $\displaystyle \bm{A}^{\mathrm{T}}\bm{x}=\bm{0}$ 的解均为 $\displaystyle \bm{B}^{\mathrm{T}}\bm{x}=\bm{0}$ 的解.
+  \task $\displaystyle \bm{B}\bm{x}=\bm{0}$ 的解均为 $\displaystyle \bm{A}\bm{x}=\bm{0}$ 的解.
+  \task $\displaystyle \bm{B}^{\mathrm{T}}\bm{x}=\bm{0}$ 的解均为 $\displaystyle \bm{A}^{\mathrm{T}}\bm{x}=\bm{0}$ 的解.
+\end{tasks}
+\ansat{336；【十年真题】 - 考点：线性方程组的解的结构 - 4}
+\vspace{6em}
+
+% --- 题目 ---
+\problem[P170-5 (21-3)]{设 $\displaystyle \bm{A} = (\bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_3, \bm{\alpha}_4)$ 为 4 阶正交矩阵. 若矩阵 $\displaystyle \bm{B} = \begin{pmatrix} \bm{\alpha}_1^{\mathrm{T}} \\ \bm{\alpha}_2^{\mathrm{T}} \\ \bm{\alpha}_3^{\mathrm{T}} \end{pmatrix}, \ \bm{\beta} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}, k$ 表示任意常数, 则线性方程组 $\displaystyle \bm{B}\bm{x} = \bm{\beta}$ 的通解 $\displaystyle \bm{x} = ( \quad )$
+}
+\begin{tasks}(2)
+  \task $\displaystyle \bm{\alpha}_2 + \bm{\alpha}_3 + \bm{\alpha}_4 + k\bm{\alpha}_1.$
+  \task $\displaystyle \bm{\alpha}_1 + \bm{\alpha}_3 + \bm{\alpha}_4 + k\bm{\alpha}_2.$
+  \task $\displaystyle \bm{\alpha}_1 + \bm{\alpha}_2 + \bm{\alpha}_4 + k\bm{\alpha}_3.$
+  \task $\displaystyle \bm{\alpha}_1 + \bm{\alpha}_2 + \bm{\alpha}_3 + k\bm{\alpha}_4.$
+\end{tasks}
+\ansat{336；【十年真题】 - 考点：线性方程组的解的结构 - 5}
+
+% --- 题目 ---
+\problem[P171-9 (25-2)]{设矩阵 $\displaystyle \bm{A} = (\bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_3, \bm{\alpha}_4)$. 若 $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_3$ 线性无关, 且 $\displaystyle \bm{\alpha}_1 + \bm{\alpha}_2 = \bm{\alpha}_3 + \bm{\alpha}_4$, 则方程组 $\displaystyle \bm{A}\bm{x} = \bm{\alpha}_1 + 4\bm{\alpha}_4$ 的通解为 $\displaystyle \bm{x} = \underline{\hspace{4em}}.$}
+\ansat{337；【十年真题】 - 考点：线性方程组的解的结构 - 9}
+
+% --- 题目 ---
+\problem[P172-变式 (07-1,2,3)]{设线性方程组
+\[ \begin{cases} x_1 + x_2 + x_3 = 0, \\ x_1 + 2x_2 + ax_3 = 0, \\ x_1 + 4x_2 + a^2 x_3 = 0 \end{cases} \]
+与方程 $$x_1 + 2x_2 + x_3 = a - 1$$ 有公共解, 求 $\displaystyle a$ 的值及所有公共解.}
+\ansat{337；【方法探究】 - 考点：线性方程组的解的结构 - 变式}
+
+% --- 题目 ---
+\problem[P173-1 (11-1,2)]{设 $\displaystyle \bm{A}=(\bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_3, \bm{\alpha}_4)$ 是 4 阶矩阵, $\displaystyle \bm{A}^*$ 为 $\displaystyle \bm{A}$ 的伴随矩阵. 若 $\displaystyle (1,0,1,0)^{\mathrm{T}}$ 是方程组 $\displaystyle \bm{Ax}=\bm{0}$ 的一个基础解系, 则 $\displaystyle \bm{A}^* \bm{x}=\bm{0}$ 的基础解系可为 ( \quad )}
+\begin{tasks}(2)
+  \task $\displaystyle \bm{\alpha}_1, \bm{\alpha}_3.$
+  \task $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2.$
+  \task $\displaystyle \bm{\alpha}_1, \bm{\alpha}_2, \bm{\alpha}_3.$
+  \task $\displaystyle \bm{\alpha}_2, \bm{\alpha}_3, \bm{\alpha}_4.$
+\end{tasks}
+\ansat{338；【真题精选】 - 考点：线性方程组的解的结构 - 1}
+
+% --- 题目 ---
+\problem[P173-4 (03-1)]{设有齐次线性方程组 $\displaystyle \bm{A}\bm{x}=\bm{0}$ 和 $\displaystyle \bm{B}\bm{x}=\bm{0}$, 其中 $\displaystyle \bm{A}, \bm{B}$ 均为 $\displaystyle m \times n$ 矩阵, 现有 4 个命题:
+\\
+\textcircled{1} 若 $\displaystyle \bm{A}\bm{x} =\bm{0}$ 的解均是 $\displaystyle \bm{B}\bm{x}=\bm{0}$ 的解, 则 $\displaystyle r(\bm{A}) \ge r(\bm{B})$;
+\\
+\textcircled{2} 若 $\displaystyle r(\bm{A}) \ge r(\bm{B})$, 则 $\displaystyle \bm{A}\bm{x}=\bm{0}$ 的解均是 $\displaystyle \bm{B}\bm{x}=\bm{0}$ 的解;
+\\
+\textcircled{3} 若 $\displaystyle \bm{A}\bm{x}=\bm{0}$ 与 $\displaystyle \bm{B}\bm{x}=\bm{0}$ 同解, 则 $\displaystyle r(\bm{A}) = r(\bm{B})$;
+\\
+\textcircled{4} 若 $\displaystyle r(\bm{A}) = r(\bm{B})$, 则 $\displaystyle \bm{A}\bm{x}=\bm{0}$ 与 $\displaystyle \bm{B}\bm{x}=\bm{0}$ 同解.
+\\
+以上命题中正确的是 ( \quad )}
+\begin{tasks}(4)
+  \task \textcircled{1} \textcircled{2}.
+  \task \textcircled{1} \textcircled{3}.
+  \task \textcircled{2} \textcircled{4}.
+  \task \textcircled{3} \textcircled{4}.
+\end{tasks}
+\ansat{338；【真题精选】 - 考点：线性方程组的解的结构 - 4}
+
+% --- 题目 ---
+\problem[P173-7 (04-4)]{设 $\displaystyle \bm{A} = \left(a_{ij}\right)_{3 \times 3}$ 是实正交矩阵, 且 $\displaystyle a_{11} = 1, \bm{b} = (1, 0, 0)^{\mathrm{T}}$, 则线性方程组 $\displaystyle \bm{Ax} = \bm{b}$ 的解是 \underline{\hspace{4em}}.}
+\ansat{338；【真题精选】 - 考点：线性方程组的解的结构 - 7}
+
+% --- 题目 ---
+\problem[P173-8 (98-1)]{已知线性方程组
+$$
+\begin{cases}
+a_{11}x_1 + a_{12}x_2 + \cdots + a_{1,2n}x_{2n} = 0, \\
+a_{21}x_1 + a_{22}x_2 + \cdots + a_{2,2n}x_{2n} = 0, \\
+\quad \cdots\cdots\cdots \\
+a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{n,2n}x_{2n} = 0
+\end{cases}
+$$
+的一个基础解系为 $\displaystyle \left(b_{11}, b_{12}, \cdots, b_{1,2n}\right)^{\mathrm{T}}, \left(b_{21}, b_{22}, \cdots, b_{2,2n}\right)^{\mathrm{T}}, \cdots, \left(b_{n1}, b_{n2}, \cdots, b_{n,2n}\right)^{\mathrm{T}}$, 则线性方程组
+$$
+\begin{cases}
+b_{11}y_1 + b_{12}y_2 + \cdots + b_{1,2n}y_{2n} = 0, \\
+b_{21}y_1 + b_{22}y_2 + \cdots + b_{2,2n}y_{2n} = 0, \\
+\quad \cdots\cdots\cdots \\
+b_{n1}y_1 + b_{n2}y_2 + \cdots + b_{n,2n}y_{2n} = 0
+\end{cases}
+$$
+的通解为 \underline{\hspace{4em}}.}
+\ansat{338；【真题精选】 - 考点：线性方程组的解的结构 - 8}
+
+% --- 题目 ---
+\problem[P173-9 (93-1)]{设$\displaystyle n$阶矩阵$\displaystyle \bm{A}$的各行元素之和均为零,且$\bm{A}$的秩为$n-1$,则线性方程组$\displaystyle \bm{A}\bm{x}=\bm{0}$的通解为\underline{\hspace{4em}}.}
+\ansat{338；【真题精选】 - 考点：线性方程组的解的结构 - 9}
+
+% --- 题目 ---
+\problem[P173-10 (05-1,2)]{已知3阶矩阵$\displaystyle \bm{A}$的第一行是$\displaystyle (a,b,c)$, $\displaystyle a,b,c$不全为零,矩阵 $\displaystyle \bm{B}=\begin{pmatrix} 1 & 2 & 3 \\ 2 & 4 & 6 \\ 3 & 6 & k \end{pmatrix}$ ($\displaystyle k$为常数), 且$\displaystyle \bm{AB}=\bm{O}$, 求线性方程组$\displaystyle \bm{A}\bm{x}=\bm{0}$的通解.}
+\ansat{338；【真题精选】 - 考点：线性方程组的解的结构 - 10}
+
+% --- 题目 ---
+\problem[P174-12 (94-1)]{设四元线性齐次方程组(\Rmnum{1})为$\displaystyle \begin{cases} x_1 + x_2 = 0, \\ x_2 - x_4 = 0. \end{cases}$又已知某线性齐次方程组(\Rmnum{2})的通解为$k_1(0,1,1,0)^{\mathrm{T}} + k_2(-1,2,2,1)^{\mathrm{T}}$.
+\begin{enumerate}
+\item[(1)] 求线性方程组(\Rmnum{1})的基础解系；
+\item[(2)] 问线性方程组(\Rmnum{1})和(\Rmnum{2})是否有非零公共解? 若有,则求出所有的非零公共解. 若没有,则说明理由.
+\end{enumerate}}
+\ansat{339；【真题精选】 - 考点：线性方程组的解的结构 - 12}

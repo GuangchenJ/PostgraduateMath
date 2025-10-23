@@ -1184,10 +1184,16 @@
   \par\noindent\textbf{\color{main}{\problemname} \theprob #1 }\rmfamily}{
   \par\ignorespacesafterend}
 
+% \newenvironment{note}{
+%   \par\noindent\makebox[-3pt][r]{
+%     \scriptsize\color{red!90}\textdbend\quad}
+%     \textbf{\color{second}\notename} \citshape}{\par}
+
 \newenvironment{note}{
-  \par\noindent\makebox[-3pt][r]{
-    \scriptsize\color{red!90}\textdbend\quad}
-    \textbf{\color{second}\notename} \citshape}{\par}
+  \par\noindent\textbf{\color{second}\notename\;}
+  \color{black!90}\cfs}{
+  % \hfill$\Box$\quad
+  \par}
 
 \newenvironment{proof}{
   \par\noindent\textbf{\color{second}\proofname\;}
