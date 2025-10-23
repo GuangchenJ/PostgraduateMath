@@ -1,15 +1,12 @@
-\documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
+\documentclass[lang=cn,math=mtpro2,11pt,scheme=chinese]{elegantbook}
 
-\title{ElegantBook：优美的 \LaTeX{} 书籍模板}
-\subtitle{Elegant\LaTeX{} 经典之作}
+\title{2026年考研数学模拟卷错题整理}
+\subtitle{参考对应的考研数学模拟卷答案}
 
-\author{Ethan Deng \& Liam Huang \& syvshc \& sikouhjw \& Osbert Wang}
-\institute{Elegant\LaTeX{} Program}
-\date{2022/12/31}
+\author{Guangchen Jiang}
+% \institute{Elegant\LaTeX{} Program}
+\date{2025/12/31}
 \version{4.5}
-\bioinfo{自定义}{信息}
-
-\extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
 
 \setcounter{tocdepth}{3}
 
@@ -20,7 +17,15 @@
 \usepackage{array}
 \usepackage{amsmath}   % 用于 \pmatrix 矩阵环境
 \usepackage{tasks}     % 用于水平排列选项
-\usepackage{xifthen}   % 用于处理 \problem 命令的可选参数
+\usepackage{xifthen} 
+\usepackage{pifont}
+% \usepackage{ifthen}       % 确保 \ifthenelse 命令可用
+% \usepackage{pifont}       % 确保 \ding 命令可用 (用于图标)
+% \usepackage{tcolorbox}    % 确保 tcolorbox 可用
+\usepackage{graphicx}
+\usepackage{fontawesome5}  % 用于提供图标，例如 \faPencil
+% 加载 tcolorbox 的 "skins" 和 "theorems" 库
+\tcbuselibrary{skins, theorems}  % 用于处理 \problem 命令的可选参数
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 
 % 修改标题页的橙色带
@@ -28,21 +33,12 @@
 \colorlet{coverlinecolor}{customcolor}
 \usepackage{cprotect}
 
+\makeatother % 恢复@的原始含义
+
 % 定义题目计数器
 \newcounter{problemcounter}[section]
 
-\renewcommand{\problem}[2][]{%
-  % \ifnum... 判断语句
-  % 检查 problemcounter 计数器的值是否 > 0
-%   \ifnum\value{problemcounter}>0 
-%     % 如果 > 0 (即, 这不是第一题), 
-%     % 就在题目前插入 \vspace (大空白)
-%     \par\vspace{5cm}\noindent 
-%   \else
-%     % 如果 = 0 (即, 这是第一题),
-%     % 就在题目前插入 \medskip (一个小间距)
-%     \par\medskip\noindent 
-%   \fi
+\renewcommand{\problem}[2][]{
   \par\medskip\noindent 
   %
   % --- 下面的代码不变 ---
@@ -51,123 +47,93 @@
   \ifthenelse{\isempty{#1}}{}{ 【#1】}% 打印可选信息 (25-2)
   \space % 打印一个空格
   #2 % 打印题目正文
+  \vspace{5em}
+}
+\renewcommand{\proofname}{答案}
+\renewcommand{\notename}{注}
+
+\newcommand{\probtagged}[2][]{%
+  \par\noindent%
+  % 左侧小图标
+  \makebox[0pt][r]{%
+    \scriptsize\color{orange!90}\faExclamationTriangle\quad%
+  }%
+  % 正文部分
+  \stepcounter{problemcounter}%
+  \arabic{problemcounter}.%
+  \ifthenelse{\isempty{#1}}{}{ 【#1】}%
+  \space #2%
+  \par%
+  \vspace{5em}
 }
 
 % (可选) 全局设置 tasks 环境的样式
 % 这里我们设置为4列，标签格式为 A. B. C. ...
 \settasks{
-  counter-format = \Alph*., % 标签格式为 A. B. ...
+  counter-format = (\Alph*), % 标签格式为 A. B. ...
   label-width = 2em,         % 标签宽度
-  item-indent = 2em,         % 选项内容缩进
+  item-indent = 3em,         % 选项内容缩进
 }
+\newcommand{\ansat}[1]{%
+  \par\nobreak % <--- 关键解决方案：结束上文，并禁止在此处分页
+  \vspace{0.3em} % 在 proof 环境前添加您想要的间距
+  \begin{proof}
+    P#1
+  \end{proof}
+  \vspace{5em} % <--- 修正：在 proof 环境后添加一些间距 (例如 0.5em)
+}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% \usepackage{setspace} 
+% \setstretch{1.3}
 
 \addbibresource[location=local]{reference.bib} % 参考文献，不要删除
 
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{caption}
+
+\geometry{a4paper, margin=1in}
+\captionsetup[table]{skip=10pt}
+
 \begin{document}
 
-\maketitle
-\frontmatter
+% \maketitle
+% \frontmatter
 
-\tableofcontents
+% \tableofcontents
 
-\mainmatter
+% \mainmatter
 
-\chapter{高数}
+\chapter{错题}
 
-\section{极限}
+\input{moni/moni.tex}
 
-\section{一元函数微分学}
+\chapter{缩写对应关系}
 
-\section{一元函数积分学}
-
-\problem[李六-1-1]{当 $x \to 0$ 时, 无穷小量
-  $a_1 = \int_x^{2\sin x} (e^{t^2} - 1) \, \mathrm{d}t$, 
-  $a_2 = \int_x^{e^x - 1} \ln \cos t \, \mathrm{d}t$, 
-  $a_3 = \int_{x^2}^x \frac{\tan^3 t}{t} \, \mathrm{d}t$ 
-  关于 $x$ 的阶数分别为 ( \quad )}
-
-\begin{tasks}(4)
-  \task 2, 3, 4.
-  \task 3, 3, 3.
-  \task 3, 5, 3.
-  \task 3, 4, 3.
-\end{tasks}
-
-\section{微分方程}
-
-% --- 题目 ---
-\problem[李六-1-3]{在 $Oxy$ 平面上, 光滑曲线 $L$ 过 $(1,0)$ 点, 并且曲线上任意一点 $P(x,y) (x \ne 0)$ 处的切线斜率与直线 $OP$ 的斜率之差等于 $ax (a>0$ 为常数$)$. 如果 $L$ 与直线 $y=ax$ 所围成的平面图形的面积为 8, 则 $a$ 的值为 ( \quad )}
-
-\begin{tasks}(4)
-  \task 2.
-  \task 4.
-  \task 6.
-  \task 8.
-\end{tasks}
-
-% --- 题目 ---
-\problem[李六-1-11]{设 $f(x)$ 是定义在 $(-\infty, +\infty)$ 上以 $2\pi$ 为周期的二阶可导函数, 且满足等式 $f(x) + 2f'(x+\pi) = \sin x$，则 $f(x) = \underline{\hspace{6em}}.$}
-
-\section{多元函数微分学}
-
-\section{多元函数积分学}
-
-\section{无穷级数}
-
-\chapter{线代}
-
-% --- 题目 1 (多选题) ---
-\problem[25-2]{下列矩阵中，可以经过若干初等行变换得到矩阵 $\begin{pmatrix} 1 & 1 & 0 & 1 \\ 0 & 0 & 1 & 2 \\ 0 & 0 & 0 & 0 \end{pmatrix}$ 的是 ( \quad )}
-
-% 使用 tasks 环境来排版选项
-\begin{tasks}(4) % (4) 表示强制分为4列
-  \task $\begin{pmatrix} 1 & 1 & 0 & 1 \\ 1 & 2 & 1 & 3 \\ 2 & 3 & 1 & 4 \end{pmatrix}$
-  \task $\begin{pmatrix} 1 & 1 & 0 & 1 \\ 1 & 1 & 2 & 5 \\ 1 & 1 & 1 & 3 \end{pmatrix}$
-  \task $\begin{pmatrix} 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 3 \\ 0 & 1 & 0 & 0 \end{pmatrix}$
-  \task $\begin{pmatrix} 1 & 1 & 2 & 3 \\ 1 & 2 & 2 & 3 \\ 2 & 3 & 4 & 6 \end{pmatrix}$
-\end{tasks}
-
-
-\chapter{概率}
-
-\section{随机事件和概率}
-
-\problem[李六-1-10]{一颗陨石等可能地坠落在区域 $A_1, A_2, A_3, A_4$ 后, 有关部门千方百计地要找到它. 根据现有的搜索条件, 如果陨石坠落在 $A_i$, 则在该区域被找到的概率是 $p_i$ (这里 $p_i$ 是由 $A_i$ 的地貌条件决定的; $i=1,2,3,4$). 现对 $A_1$ 搜索后没有发现这块陨石, 则陨石坠落在 $A_4$ 的概率为 ( \quad )}
-
-\begin{tasks}(4)
-  \task $\frac{1}{3}$.
-  \task $\frac{1}{4}$.
-  \task $\frac{1-p_1}{4-p_1}$.
-  \task $\frac{1}{4-p_1}$.
-\end{tasks}
-
-\section{随机变量及其分布}
-
-\problem[李六-1-8]{设连续型随机变量 $X$ 的分布函数为 $F(x)$, 且 $F(0)=0$. 则下列函数可作为分布函数的是 ( \quad )}
-
-% 注意：由于选项内容较长, 这里使用 (2) 即分为 2 列
-% 如果您坚持 4 列, 请使用 (4)
-\begin{tasks}(2)
-  \task $G_1(x) = \begin{cases} 1+F\left(\frac{1}{x}\right), & x > 1, \\ 0, & x \le 1. \end{cases}$
-  \task $G_2(x) = \begin{cases} 1-F\left(\frac{1}{x}\right), & x > 1, \\ 0, & x \le 1. \end{cases}$
-  \task $G_3(x) = \begin{cases} F(x)-F\left(\frac{1}{x}\right), & x > 1, \\ 0, & x \le 1. \end{cases}$
-  \task $G_4(x) = \begin{cases} F(x)+F\left(\frac{1}{x}\right), & x > 1, \\ 0, & x \le 1. \end{cases}$
-\end{tasks}
-
-\section{多维随机变量及其分布}
-
-\section{随机变量的数字特征}
-
-\section{大数定律与中心极限定理}
-
-\section{数理统计的基本概念}
-
-\section{参数估计}
-
-\nocite{*}
-
-\printbibliography[heading=bibintoc, title=\ebibname]
-\appendix
-\chapter{答案}
+\begin{table}[h!]
+\centering
+\caption{缩写与全称对照表}
+\renewcommand{\arraystretch}{1.3} % 表格行距
+\setlength{\tabcolsep}{10pt} % 列间距
+\begin{tabular}{>{\bfseries}m{0.25\linewidth} m{0.65\linewidth}}
+\toprule
+\textbf{缩写} & \textbf{对应模拟卷} \\
+\midrule
+李武六 & 李永乐武忠祥冲刺 6 套卷 \\
+张八 & 张宇8套卷 \\
+超越 & 合工大超越5+5套卷 \\
+共创 & 合工大共创5套卷 \\
+欧三 & 欧几里得3套卷 \\
+李武冲三 & 李永乐武忠祥最后 3 套卷（名校版） \\
+张四 & 张宇4套卷 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \end{document}
