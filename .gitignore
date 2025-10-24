@@ -439,4 +439,6 @@ TSWLatexianTemp*
 *.sta
 
 # Project local settings
-./*.pdf
+ZhenTi.pdf
+MoNi.pdf
+XianDaiZhenTi.pdf
