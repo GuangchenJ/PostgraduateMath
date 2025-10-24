@@ -1,0 +1,117 @@
+\documentclass[lang=cn,math=mtpro2,11pt,scheme=chinese]{elegantbook}
+
+\title{考研数学真题错题整理}
+\subtitle{参考 2026 版《考研数学这十年》}
+
+\author{Guangchen Jiang}
+% \institute{Elegant\LaTeX{} Program}
+\date{2025/12/31}
+\version{4.5}
+% \bioinfo{自定义}{信息}
+
+% \extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\usepackage{amsmath}   % 用于 \pmatrix 矩阵环境
+\usepackage{tasks}     % 用于水平排列选项
+\usepackage{xifthen} 
+\usepackage{pifont}
+\usepackage{}
+% \usepackage{ifthen}       % 确保 \ifthenelse 命令可用
+% \usepackage{pifont}       % 确保 \ding 命令可用 (用于图标)
+% \usepackage{tcolorbox}    % 确保 tcolorbox 可用
+\usepackage{graphicx}
+\usepackage{fontawesome5}  % 用于提供图标，例如 \faPencil
+% 加载 tcolorbox 的 "skins" 和 "theorems" 库
+\tcbuselibrary{skins, theorems}  % 用于处理 \problem 命令的可选参数
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\makeatother % 恢复@的原始含义
+
+% 定义题目计数器
+\newcounter{problemcounter}[section]
+
+\renewcommand{\problem}[2][]{
+  \par\medskip\noindent 
+  %
+  % --- 下面的代码不变 ---
+  \stepcounter{problemcounter}% 计数器加 1 (第一题变1, 第二题变2...)
+  \arabic{problemcounter}.% 打印题号 1.
+  \ifthenelse{\isempty{#1}}{}{ 【#1】}% 打印可选信息 (25-2)
+  \space % 打印一个空格
+  #2 % 打印题目正文
+}
+\renewcommand{\proofname}{答案}
+\renewcommand{\notename}{注}
+
+\newcommand{\probtagged}[2][]{%
+  \par\noindent%
+  % 左侧小图标
+  \makebox[0pt][r]{%
+    \scriptsize\color{orange!90}\faExclamationTriangle\quad%
+  }%
+  % 正文部分
+  \stepcounter{problemcounter}%
+  \arabic{problemcounter}.%
+  \ifthenelse{\isempty{#1}}{}{ 【#1】}%
+  \space #2%
+  \par%
+}
+
+% (可选) 全局设置 tasks 环境的样式
+% 这里我们设置为4列，标签格式为 A. B. C. ...
+\settasks{
+  counter-format = (\Alph*), % 标签格式为 A. B. ...
+  label-width = 2em,         % 标签宽度
+  item-indent = 3em,         % 选项内容缩进
+}
+\newcommand{\ansat}[1]{%
+  \par\nobreak % <--- 关键解决方案：结束上文，并禁止在此处分页
+  \vspace{0.3em} % 在 proof 环境前添加您想要的间距
+  \begin{proof}
+    P#1
+  \end{proof}
+  \vspace{5em} % <--- 修正：在 proof 环境后添加一些间距 (例如 0.5em)
+}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% \usepackage{setspace} 
+% \setstretch{1.3}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+
+\begin{document}
+
+% \maketitle
+% \frontmatter
+
+% \tableofcontents
+
+\mainmatter
+
+\chapter*{线代错题（乱序版）}
+
+\input{zhenti/xiandai/XianDaiZhenTi_shuffled_problems.tex}
+
+% \nocite{*}
+
+% \printbibliography[heading=bibintoc, title=\ebibname]
+% \appendix
+% \chapter{答案}
+
+\end{document}
