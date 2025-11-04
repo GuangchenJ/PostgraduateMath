@@ -1,0 +1,539 @@
+\documentclass[lang=cn,math=mtpro2,11pt,scheme=chinese,pad]{elegantbook}
+
+\title{离散数学}
+\subtitle{参考《Discrete Mathematics》}
+
+\author{Guangchen Jiang}
+% \institute{Elegant\LaTeX{} Program}
+\date{2025/12/31}
+\version{4.5}
+% \bioinfo{自定义}{信息}
+
+% \extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\usepackage{amsmath}   % 用于 \pmatrix 矩阵环境
+\usepackage{tasks}     % 用于水平排列选项
+\usepackage{xifthen} 
+\usepackage{pifont}
+\usepackage{nicefrac}
+% \usepackage{ifthen}       % 确保 \ifthenelse 命令可用
+% \usepackage{pifont}       % 确保 \ding 命令可用 (用于图标)
+% \usepackage{tcolorbox}    % 确保 tcolorbox 可用
+\usepackage{graphicx}
+\usepackage{fontawesome5}  % 用于提供图标，例如 \faPencil
+% 加载 tcolorbox 的 "skins" 和 "theorems" 库
+\tcbuselibrary{skins, theorems}  % 用于处理 \problem 命令的可选参数
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\makeatother % 恢复@的原始含义
+
+% 定义题目计数器
+\newcounter{problemcounter}[section]
+
+\renewcommand{\problem}[2][]{
+  \par\medskip\noindent 
+  %
+  % --- 下面的代码不变 ---
+  \stepcounter{problemcounter}% 计数器加 1 (第一题变1, 第二题变2...)
+  \arabic{problemcounter}.% 打印题号 1.
+  \ifthenelse{\isempty{#1}}{}{ 【#1】}% 打印可选信息 (25-2)
+  \space % 打印一个空格
+  #2 % 打印题目正文
+}
+\renewcommand{\proofname}{答案}
+\renewcommand{\notename}{注}
+
+\newcommand{\probtagged}[2][]{%
+  \par\noindent%
+  % 左侧小图标
+  \makebox[0pt][r]{%
+    \scriptsize\color{orange!90}\faExclamationTriangle\quad%
+  }%
+  % 正文部分
+  \stepcounter{problemcounter}%
+  \arabic{problemcounter}.%
+  \ifthenelse{\isempty{#1}}{}{ 【#1】}%
+  \space #2%
+  \par%
+}
+
+% (可选) 全局设置 tasks 环境的样式
+% 这里我们设置为4列，标签格式为 A. B. C. ...
+\settasks{
+  counter-format = (\Alph*), % 标签格式为 A. B. ...
+  label-width = 2em,         % 标签宽度
+  item-indent = 3em,         % 选项内容缩进
+}
+\newcommand{\ansat}[1]{%
+  \par\nobreak % <--- 关键解决方案：结束上文，并禁止在此处分页
+  \vspace{0.3em} % 在 proof 环境前添加您想要的间距
+  \begin{proof}
+    P#1
+  \end{proof}
+  \vspace{5em} % <--- 修正：在 proof 环境后添加一些间距 (例如 0.5em)
+}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% \usepackage{setspace} 
+% \setstretch{1.3}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{古典概型}
+
+\section{加法原则和乘法原则}
+
+\begin{theorem}[加法原则]
+  如果事件 \(A\) 可以以 \(m\) 种方式发生，事件 \(B\) 可以以 \(n\) 种方式发生，并且事件 \(A\) 和事件 \(B\) 互斥，那么事件 \(A\) 或事件 \(B\) 可以以 \(m+n\) 种方式发生。
+\end{theorem}
+
+加法原则的一个非常重要的应用条件是他们两个\textbf{不能同时发生（互斥的）}。
+
+我们思考几个这样的问题：
+
+\begin{example}
+  以 A 或 B 开头的两个字母的单词一共有多少个？
+\end{example}
+\begin{proof}
+  以 A 开头的两个字母的单词一共有 \(26\) 个（第二个字母可以是任意字母）；以 B 开头的两个字母的单词一共有 \(26\) 个（第二个字母可以是任意字母）。因此，以 A 或 B 开头的两个字母的单词一共有 \(26 + 26 = 52\) 个。
+\end{proof}
+这里面就应用的是加法原则。
+
+\begin{example}
+  有多少个两字母的单词以5个元音字母（a, e, i, o, u）之一开头？
+\end{example}
+\begin{proof}
+   以 a 开头的两个字母的单词一共有 \(26\) 个（第二个字母可以是任意字母）；以 e 开头的两个字母的单词一共有 \(26\) 个（第二个字母可以是任意字母）... 以 u 开头的两个字母的单词一共有 \(26\) 个（第二个字母可以是任意字母）。因此，以5个元音字母之一开头的两个字母的单词一共有 \(26 + 26 + 26 + 26 + 26 = 5 \times 26 = 130\) 个。这里虽然用了乘法，但主要还是加法原理为主。
+\end{proof}
+
+\begin{example}
+  假设你去参加一个活动，可以选择6种酸奶中的一种，以及4种水果中的一种。你一共有多少种不同的选择方式？
+\end{example}
+\begin{proof}
+  加法原理的核心是：若事件可拆分为多个 “互不重叠（ disjoint ）” 的子事件，总方法数等于各子事件方法数的和。
+这里把 “选组合” 拆成 4 个互不重叠的子事件：
+\begin{itemize}
+  \item 子事件 A：选 “第一种配料”+ 任意一种酸奶 → 6 种选择；
+  \item 子事件 B：选 “第二种配料”+ 任意一种酸奶 → 6 种选择；
+  \item 子事件 C：选 “第三种配料”+ 任意一种酸奶 → 6 种选择；
+  \item 子事件 D：选 “第四种配料”+ 任意一种酸奶 → 6 种选择。
+\end{itemize}
+因为这 4 个子事件互不重叠（选第一种配料就不会选第二种，以此类推），所以总选择数是 \(6+6+6+6= 4 \times 6 = 24\)。
+\end{proof}
+
+这些例子告诉我们，如果对相同大小的事件使用加法原理时，使用乘法的速度会变快。
+由此我们引出乘法原则：
+\begin{theorem}[乘法原则]
+  如果事件 \(A\) 可以以 \(m\) 种方式发生，事件 \(B\) 可以以 \(n\) 种方式发生，并且事件 \(A\) 和事件 \(B\) 是独立的，那么事件 \(A\) 和事件 \(B\) 同时发生的方式总数为 \(m \times n\)。
+\end{theorem}
+
+我们思考以下的问题：
+\begin{example}
+  用三个字母和三个数字你能拼出多少个车牌（结构这里先是三个连续的字母，然后三个连续的数字，例如aaa111）？
+\end{example}
+\begin{proof}
+  这里有6个事件：第一个字母、第二个字母、第三个字母、第一个数字、第二个数字和第三个数字。前三个事件各自可以以 26 种方式发生；后三种情况各有 10 种发生方式。因此，使用乘法原理，车牌总数将为 \(26 \times 26 \times 26 \times 10 \times 10 \times 10\)。
+  再详细点说，对于前三个的字母部分：
+  \begin{itemize}
+    \item 第 1 个字母：26 种选择；
+    \item 第 2 个字母：对第 1 个字母的每一种选择，第 2 个字母仍有 26 种选择；
+    \item 第 3 个字母：对前两个字母的每一种组合，第 3 个字母仍有 26 种选择。
+    \item 根据乘法原理，字母部分的总选择数为：\(26 \times 26 \times 26\)
+  \end{itemize}
+  然后对于后三个数字部分：
+  \begin{itemize}
+    \item 第 1 个数字：10 种选择（0-9）；
+    \item 第 2 个数字：对第 1 个数字的每一种选择，第 2 个数字仍有 10 种选择；
+    \item 第 3 个数字：对前两个数字的每一种组合，第 3 个数字仍有 10 种选择。
+  \end{itemize}
+  根据乘法原理，数字部分的总选择数为：\(10 \times 10 \times 10\)，对应 000 到 999 的所有三位数）。
+  因为 “选字母” 和 “选数字” 是两个独立的大步骤，所以总车牌数是字母部分的选择数 \(\times\) 数字部分的选择数，即：\(26 \times 26 \times 26 \times 10 \times 10 \times 10\)
+\end{proof}
+
+\begin{example}
+  可以从集合 \(\left\{ 1, 2, 3, 4, 5 \right\} \to \left\{ a, b, c, d \right\} \) 中选择多少个不同的映射函数 \(f\) ？
+\end{example}
+\begin{proof}
+  函数会将定义域中的每个元素恰好映射到陪域中的一个元素。我们可以把 1 映射到哪里？有 4 种选择。把 2 映射到哪里？同样有 4 种选择。这里我们有 5 个 “事件”（为定义域中的一个元素选择像），每个事件都可以以 4 种方式发生（该像的选择数）。因此，共有 \(4^5\) 个函数。
+  遇到这种计数问题，我们可以将其解释为：求从 \(\left\{ 1, 2, \dots, n \right\}\)（其中 \(n\) 是事件重复的次数）到 \(\left\{ 1, 2, \dots, k \right\}\)（其中 \(k\) 是该事件发生的方式数）的函数数量。
+\end{proof}
+
+\section{考虑集合的加法原则和乘法原则}
+
+考虑这个问题：
+\begin{example}
+  假设你有 9 件衬衫和 5 条裤子。
+  \begin{itemize}
+    \item 你能搭配出多少套服装？
+    \item 若今天是 “半裸日”，你只穿一件衬衫或者只穿一条裤子，你有多少种选择？
+  \end{itemize}
+\end{example}
+\begin{proof}
+  这个问题的答案很简单：第一个问题的答案是 \(9 \times 5\)，第二个问题的答案是 \(9+5\)。这分别应用了乘法原理和加法原理。这里有两个事件：选一件衬衫和选一条裤子。第一个事件有 9 种发生方式，第二个事件有 5 种发生方式。要同时选一件衬衫和一条裤子，就用乘法；要只选一件衣物，就用加法。
+
+  现在从集合的角度分析这个问题。我们有两个集合，分别记为 \(\mathcal{S}\) 和 \(\mathcal{P}\)。集合 \(\mathcal{S}\) 包含所有 9 件衬衫，因此 \(\left| \mathcal{S} \right| = 9\) 表示集合 \(\mathcal{S}\) 的元素个数）；集合 \(\mathcal{P}\) 包含 5 个元素（即你的 5 条裤子），因此 \(\left| \mathcal{P} \right| = 5\)。
+
+  从集合的角度看，问题 2 实际上是要计算 \(\left| \mathcal{S} \cup \mathcal{P} \right|\)（即衬衫集合与裤子集合的并集的元素个数）。由于衬衫和裤子没有重叠（一件衣物不可能既是衬衫又是裤子），即 \(\left| \mathcal{S} \cap \mathcal{P} \right| = 0\)（\(\mathcal{S} \cap \mathcal{P}\) 是交集），所以并集的元素个数为 \(\left| \mathcal{S} \right| + \left| \mathcal{P} \right|\)。
+
+问题 1 稍复杂：我们不是求 “既是衬衫又是裤子的衣物数量”（交集为空），而是求 “一件衬衫和一条裤子的搭配对数”。可以将其理解为：有多少个有序对 \((x,y)\)，其中 \(x\) 是衬衫，\(y\) 是裤子，这个数量是 \(\left| \mathcal{S} \right| \times \left| \mathcal{P} \right|\)。
+\end{proof}
+
+所以，在集合情况下，加法原则变成：
+\begin{theorem}[（集合）加法原则]
+  如果两个集合 \(\mathcal{A}\) 和 \(\mathcal{B}\) 是互不重叠的（即 \(\mathcal{A} \cap \mathcal{B} = \emptyset\)），那么事件
+  \[
+  |\mathcal{A} \cup \mathcal{B}| = |\mathcal{A}| + |\mathcal{B}|
+  \]
+\end{theorem}
+
+乘法原则变成了笛卡尔积：
+\begin{proof}[笛卡尔积]
+  给定两个集合 \(\mathcal{A}\) 和 \(\mathcal{B}\)，定义它们的笛卡尔积为
+  \[
+    \mathcal{A} \times \mathcal{B} = \{(a,b) | a \in \mathcal{A}, b \in \mathcal{B} \}
+  \]
+  笛卡尔积 \(\mathcal{A} \times \mathcal{B}\) 包含所有可能的有序对 \((a,b)\)，其中第一个元素来自集合 \(\mathcal{A}\)，第二个元素来自集合 \(\mathcal{B}\)。因此，笛卡尔积的元素个数为 \(|\mathcal{A}| \times |\mathcal{B}|\)。
+  例如，我们有集合 \(\mathcal{A}= \{1, 2\}\) 和集合 \(\mathcal{B}= \{a, b\}\)，那么它们的笛卡尔积为 \(\mathcal{A} \times \mathcal{B} = \{(1,a), (1,b), (2,a), (2,b)\}\)，包含 4 个元素，即 \(2 \times 2 = 4\)。
+\end{proof}
+
+所以，乘法中的乘法原则：
+\begin{theorem}[（集合）乘法原则]
+  如果两个集合 \(\mathcal{A}\) 和 \(\mathcal{B}\)，那么
+  \[
+  |\mathcal{A} \times \mathcal{B}| = |\mathcal{A}| \times |\mathcal{B}|
+  \]
+\end{theorem}
+
+当然，如果 \(\mathcal{A}\) 和 \(\mathcal{B}\) 有重叠（即 \(\mathcal{A} \cap \mathcal{B} \neq \emptyset\)），那么加法原则需要修正为：
+\begin{theorem}[（集合）加法原则（修正）]
+  如果两个集合 \(\mathcal{A}\) 和 \(\mathcal{B}\)，那么
+  \[
+  |\mathcal{A} \cup \mathcal{B}| = |\mathcal{A}| + |\mathcal{B}| - |\mathcal{A} \cap \mathcal{B}|
+  \]
+\end{theorem}
+三个集合的时候：
+\begin{theorem}[（集合）加法原则（修正）]
+如果三个集合 \(\mathcal{A}\)、\(\mathcal{B}\) 和 \(\mathcal{C}\)，那么
+\[
+|\mathcal{A} \cup \mathcal{B} \cup \mathcal{C}| = |\mathcal{A}| + |\mathcal{B}| + |\mathcal{C}| - |\mathcal{A} \cap \mathcal{B}| - |\mathcal{A} \cap \mathcal{C}| - |\mathcal{B} \cap \mathcal{C}| + |\mathcal{A} \cap \mathcal{B} \cap \mathcal{C}|
+\]
+\end{theorem}
+\begin{note}
+  三个集合，就是三个单独的加起来，然后减掉俩俩重合的部分，然后由于多减了一个三个重合的部分，所以加上一个三个重合的部分。
+\end{note}
+
+所以我们考虑这道题：
+\begin{example}\label{example:ex1}
+  袋中有13个球，其中6个是白球，7个是黑球。取出之后有放回。利用集合的思想，首先考虑以下问题：
+  \begin{itemize}
+    \item 从袋中\textbf{有}放回的取出两个球
+    \begin{itemize}
+      \item 从袋中\textbf{有}放回的取出两个球，有多少种取法？
+      \item 从袋中\textbf{有}放回的取出两个球，这两个球都是黑球，有多少种取法？
+      \item 从袋中\textbf{有}放回的取出两个球，第一个球是白球，第二个球是黑球，有多少种取法？
+      \item 从袋中\textbf{有}放回的取出两个球，第一个球是黑球，第二个球是白球，有多少种取法？
+    \end{itemize}
+    \item 从袋中\textbf{无}放回的取出两个球
+    \begin{itemize}
+      \item 从袋中\textbf{无}放回的取出两个球，有多少种取法？
+      \item 从袋中\textbf{无}放回的取出两个球，这两个球都是黑球，有多少种取法？
+      \item 从袋中\textbf{无}放回的取出两个球，第一个球是白球，第二个球是黑球，有多少种取法？
+      \item 从袋中\textbf{无}放回的取出两个球，第一个球是黑球，第二个球是白球，有多少种取法？
+    \end{itemize}
+    \item “第一个球是白球，第二个球是黑球”和“第一个球是黑球，第二个球是白球”有什么区别和相同之处？
+  \end{itemize}
+\end{example}
+\begin{note}
+  我们怎么表示 “有放回” 这种情况？每次去取球的集合怎么表示？“无放回”这种情况，第一次取球什么时候会影响第二次取球？“第一个球是白球，第二个球是黑球”和“第一个球是黑球，第二个球是白球”都是取了一个白球和一个黑球，但是他们两个的情况是一样的么？
+\end{note}
+
+然后，我们再考虑一种情况：
+\begin{example}\label{example:ex1}
+  袋中有13个球，其中6个是白球，2个是黑球，5个是红球。
+\end{example}
+\begin{note}
+  这里有三种球，你能不能看成6个白球，7个非白球（把黑球和红球看成一样的情况）。或者5个红球，8个非红球？思考一下，你做过的哪道题需要这样处理？
+\end{note}
+
+\section{二进制字符串}
+
+考虑我们上面取球的情况，用1表示取黑球，用0表示取白球。
+那么取2个球，取到一个黑球和一个白球的可能用0和1表示，分别为 01 和 10。
+取到两个黑球的情况只有一种：11，取到两个白球的情况也只有一种 11。
+
+那我们只考虑有黑球和白球的情况，如果我们取5个球，用01这种数字表示，思考一下我们可以有多少种0和1的五位数组合？~\footnote{我们有 5 个位，每个位可以是 0 或 1。所以第一位有 2 种选择，第二位有 2 种选择，依此类推。根据乘法原理，共有 \(2 \times 2 \times 2 \times 2 \times 2 = 2^5\) 个这样的字符串}要是不会，可以考虑回顾上面的乘法原则，再不会就看下面的脚注。
+
+5位数的情况太难写出来了，我们可以尝试自己写出三位数的情况么？
+\[
+000, 001, 010, 100, 011, 101, 110, 111
+\]
+我们思考你写出一个取3个球里面有2个黑球的情况都有哪些？首先每个位置都可以是0或者1，所以
+\begin{itemize}
+  \item 第一种情况（字符串以 0 开头），我们接下来必须确定另外 2 位。要总共有 2 个 1，剩下的 2 位中必须有 2 个 1。
+  \item 第二种情况（字符串以 1 开头），我们仍然有 2 位需要选择，但现在只能有 1 个 1，所以我们应该考虑所有有 1 个 1 的两位字符串。
+\end{itemize}
+我们用 \(\text{B}^{n}\) 表示 \(n\) 位字符串可能有多少种情况。用 \(\text{B}^{n}_{k}\) 表示 \(n\) 位字符串中有 \(k\) 个 1 的字符串一共有多少种。
+因此， \(\text{B}^{3}_{2}\) 中的字符串都具有 “0 后跟一个来自 \(\text{B}^{2}_{2}\) 的字符串” 或 “1 后跟一个来自 \(\text{B}^{2}_{1}\)。这两个集合是不相交的，因此我们可以使用加法原理：
+\[
+|\text{B}^{3}_{2}| = |\text{B}^{2}_{2}| + |\text{B}^{2}_{1}|
+\]
+尝试举一反三一下，这个情况跟你学的哪个地方很像？像在哪？
+\begin{proof}
+  组合 \(\text{C}_{k}^{n}\)。
+\end{proof}
+
+我们再考虑一个公式，我们考虑公式：
+\[
+\left( x + y \right)^{3} = \left( x + y \right) \cdot \left( x + y \right) \cdot \left( x + y \right)
+\]
+把它展开我们会得到什么？（自己在这里先动手试试，不要往下看）
+
+\[
+\left( x + y \right)^{3} = x^3 + 3 x^2 y +3 x y^2 + y^3
+\]
+为什么这里只有一个 \(x^3\) 和 \(y^3\)，而有三个 \(x^2 y\) 和 \(x y^2\)？
+想一下，如果要出现 \(x^3\)，那么我们对于每一个 \(\left( x + y \right)\) 都要选择一个 \(x\)；而对于 \(x^2 y\)，我们需要从三个 \(\left( x + y \right)\) 中选择两次 \(x\)，一次 \(y\)。
+这种情况怎么算？你自己列出来。
+
+所以对于一个 \(\left( x + y \right)^{n}\)，其中的一项 \(x^{n-k} y^k\) 前面的序数是多少？
+
+这就是二项式序数 \(\binom{n}{k}\)，当然张宇教的是 \(\text{C}^{k}_{n}\)，但我推荐写成 \(\binom{n}{k}\)。
+并且记住它的一个性质：
+\[
+\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}
+\]
+怎么记住？参考01这个串中是怎么考虑的。
+
+我们再考虑一个问题，你只需要列出对应的二项式序数 \(\binom{n}{k}\) 即可：
+\begin{example}
+  \begin{itemize}
+    \item 我们取 10 个球，其中有 3 个白球，7 个黑球的情况一共有多少种？
+    \item 我们取 24 个球，其中有 3 个白球，8 个黑球，剩下的都是红球的情况一共有多少种？
+    \item 袋子里有 80 个球，我们取 25 个，有多少种取法？
+  \end{itemize}
+\end{example}
+\begin{note}
+  对于第二个问题，你参考我们考虑第一个位置是0还是1的分治思路。以及乘法原则和黑球与非黑球的思路。对于第三个问题，你思考他本质上是一个新问题么？“黑球和非黑球”是一种“是A与不是A”的问题，那这里呢？
+\end{note}
+再思考一道题：
+\problem[张1000-随机事件与概率-3]{一平面质点从原点出发, 每次走一个单位, 只有向上、向右两种走法, 且向上走的概率为 $\displaystyle p (0 < p < 1)$, 现质点走到了点 $\displaystyle (3, 2)$, 则这 5 步按照: 右 $\displaystyle \to$ 上 $\displaystyle \to$ 右 $\displaystyle \to$ 上 $\displaystyle \to$ 右的方式走的概率为 ( \quad ).
+}
+\begin{tasks}(4)
+  \task $\displaystyle \frac{3}{20}$.
+  \task $\displaystyle \frac{1}{13}$.
+  \task $\displaystyle \frac{1}{20}$.
+  \task $\displaystyle \frac{1}{10}$.
+\end{tasks}
+\begin{note}
+  这道题本质不就是选5次里面往右走3次，往上走2次的概率么？
+\end{note}
+
+\section{排列（Preliminaries）}
+
+我们重新回顾一个问题对于一堆字母组成的集合：\(\left\{ a, b, c, d \right\}\)，我们想要将他们排序，有几种可能的排列情况？
+首先，我们看第一个字母，他可能是集合 \(\left\{ a, b, c, d \right\}\) 中的任意一个，所以这个可能是 4 种。当我们确定第一个字母为 \(a\) 的情况下，第二个字母可能的集合为 \(\left\{ b, c, d \right\}\) 中的任意一个；当我们确定第二个字母为 \(b\)，那剩下的可能的字母集合为 \(\left\{ c, d \right\}\)；以此到确定第三个字母为 \(c\)，则最后一个字母的集合为 \(\left\{ d \right\}\)，最后一个字母必然也确定。
+
+这里，如果我们只考虑前两个字母的排列组合呢？是不是只要截断就可以了？我们这个问题简化一下，变成4个字母有顺序的抽取两个，一共可以抽出多少种？这些地方如果你实在理解不了，动笔把所有的可能都写出来，然后思考你是怎么想的这么写。
+
+回顾这个过程，我们能否将其类比于上述描述中的集合的笛卡尔积？直接使用乘法原则，得到排列的公式:
+\[
+\text{P}_{n}^{m} = n (n-1) (n-2) \cdots (n-m+1) = \frac{n!}{(n-m)!}
+\]
+
+我们再从另一个角度思考，\(n\) 个字母，抽出 \(k\) 个进行排序，那首先我们要从 \(n\) 个字母中抽出 \(k\) 个，这个是什么问题？可以用什么操作？思考一下？
+然后我们对这抽出的 \(k\) 个进行排序又是个什么问题？又该怎么操作？
+
+\vspace{10em}
+
+从 \(n\) 个字母中抽出 \(k\) 个不是二项式系数 \(\binom{n}{k}\) 么？
+抽出的 \(k\) 个字母进行排成 \(k\) 这么长的组合，一共有 \(\text{P}_{k}^{k} = k!\) 种可能。
+所以依据乘法原则，我们可以得到：
+\[
+\text{P}_{n}^{k} = \binom{n}{k} \cdot \text{P}_{k}^{k} = \binom{n}{k} \cdot k!
+\]
+然后我们就能得到二项式序数的公式：
+\[
+\binom{n}{k} = \frac{n!}{(n-k)! k!}
+\]
+
+\section{一些经典问题}
+
+我们来看一下一些经典问题：
+\begin{example}
+  考虑一个袋子中有20个球，其中6个白球，14个黑球，求：
+  \begin{itemize}
+    \item 先后\textbf{有}放回的取，取一个球是白球有多少种可能？
+    \item 先后\textbf{有}放回的取，取2个球，都是白球的可能性有多少种？
+    \item 先后\textbf{有}放回的取，取3个球，都是白球的可能性有多少种？
+    \item 先后\textbf{有}放回的取，取2个球，是黑球的可能性有多少种？
+    \item 先后\textbf{有}放回的取，取2个球，第一个是黑球，第二个是白球的可能性有多少种？
+    \item 先后\textbf{有}放回的取，取2个球，第一个是白球，第二个是黑球的可能性有多少种？
+    \item 先后\textbf{有}放回的取，取3个球，1个是白球，2个是黑球的组合有多少种？
+    \item 先后\textbf{有}放回的取，取3个球，1个是白球，2个是黑球的可能性有多少种？
+    \item 先后\textbf{有}放回的取，取5个球，3个是白球，两个是黑球的组合有多少种？
+    \item 先后\textbf{有}放回的取，取5个球，3个是白球，两个是黑球的可能性有多少种？
+  \end{itemize}
+\end{example}
+\begin{note}
+  注意这里的组合是什么意思。举个例子，取一次是一个白球的结果是一个集合 
+  \[
+  \left\{ \text{第1个白球}, \text{第2个白球}, \dots, \text{第6个白球} \right\}
+  \]
+  取两次，一次是黑球，一次是白球的组合的集合是 \(\left\{\text{黑白}, \text{白黑}\right\}\)；
+  请思考这里该怎么将他们联系起来呢？要使用乘法原则该怎么思考？
+\end{note}
+
+\subsection{占位问题}
+
+这个地方主要看张宇三十讲的例1.1，背下来（一定要理解了背下来）之后做例1.3。
+
+\begin{example}
+  \begin{itemize}
+    \item 如果我们安排座位，一共有10个座位给10个人，我们固定5号座位给1号人，这种情况下有多少种可能？
+    \item 给30个人安排住房，房子一共有60间，其中恰好有30间是一个人住，这种情况有多少种？
+    \item 给40个人安排住房，房子一共有60间，我们指定有20间各住一个人，这种情况有多少种？
+  \end{itemize}
+\end{example}
+
+\subsection{星星和杠子问题（看一下了解）}
+
+\begin{example}
+  你有 7 块饼干要给 4 个小孩。这7块饼干都是相同的，并且我们分发饼干的顺序是无关紧要的。有多少种方法可以做到这一点？
+\end{example}
+\begin{note}
+  这里有两种情况：
+  \begin{itemize}
+    \item 某个小孩可以不拿饼干
+    \item 每个小孩都必须拿一块饼干
+  \end{itemize}
+\end{note}
+
+我们可以这样考虑：在给了第一个小孩多少块饼干后，我们停止给第一个小孩饼干，然后开始给第二个小孩。
+
+我们使用 * 表示饼干， | 来表示分割， | 的两边分别表示该给这两个小孩多少饼干：
+\[
+*** | * | * | **
+\]
+这里三个 | 把所有的7个饼干分成4分（分成n份，你需要n-1个|），这里代表给第一个小孩3个饼干，第二个小孩1个饼干，第三个小孩1个饼干，第四个小孩2个饼干。
+
+同样，我们考虑这样一个情况
+\[
+| *** | | ****
+\]
+它代表小孩 A 得到 0 块饼干（因为我们在任何 * 之前就切换到了小孩 B），小孩 B 得到 3 块饼干（在下一个 | 之前的三个 *），小孩 C 得到 0 块饼干（在下一个 | 之前没有*），小孩 D 得到剩下的 4 块饼干。
+
+然后思考，这个问题是不是就变成了\(n\) 个物品中选 \(k\) 个的情况？
+如果按照这样思考，我们有7个代表饼干（需要分配的问题）的*，3个代表小孩的 |，这个3个是通过4个小孩得到的（4-1,三刀把一个面包条分成四份），所以我们可以知道，在我们允许某个小孩可以不拿饼干的情况下，我们有 \(\binom{10}{3}\) 种方法将 7 块饼干分给 4 个小孩。
+
+继续考虑第二种情况：有多少种方法可以将 7 块饼干分给 4 个小孩，使得每个小孩至少得到一块饼干？
+这种情况字符串必须以至少一个*来开始和结束（这样小孩 A 和 D 能得到饼干），例如我们不可以这样
+\[
+| *** | * | ***
+\]
+并且也不能有两个相邻的|（这样小孩 B 和 C 就不会被跳过），比如：
+\[
+| *** | | ****
+\]
+
+确保这一点的一种方法是只将杠子放在星星之间的空隙中。有 7 个星星，星星之间有 6 个空隙（空隙用 \(@\) 表示）。
+\[
+* @ * @ * @ * @ * @ * @ *
+\]
+我们必须从这 6 个空隙中选择 3 个来放置杠子。因此，有 $\binom{6}{3}$ 种方法将 7 块饼干分给每个小孩至少一块。
+
+% \nocite{*}
+
+% \printbibliography[heading=bibintoc, title=\ebibname]
+\appendix
+\chapter{答案}
+
+\begin{proof}[例题 1.7 答案]
+  用集合表示所有取球的可能结果，
+  \begin{itemize}
+    \item 设袋中所有 13 个球构成的集合为 \(\mathcal{U}=\left\{ \text{第1个小球}, \text{第2个小球}, \dots, \text{第13个小球} \right\}\)，则集合元素个数 \(|\mathcal{U}|=13\)（6 个白球 + 7 个黑球）。
+    \item 设袋中 7 个黑球构成的集合为 \(\mathcal{B}=\left\{ \text{第1个黑球}, \text{第2个小球}, \dots, \text{第7个黑球} \right\}\)，则集合元素个数 \(|\mathcal{B}|=7\)。
+    \item 设袋中 6 个白球构成的集合为 \(\mathcal{W}=\left\{ \text{第1个白球}, \text{第2个白球}, \dots, \text{第6个白球} \right\}\)，则集合元素个数 \(|\mathcal{W}|=6\)。
+  \end{itemize}
+
+  现在我们分别考虑有放回和无放回的情况：
+
+  \begin{itemize}
+    \item 在有放回的情况下，第一次取球后球会放回袋中，因此第一次取球的结果集合与第二次取球的结果集合完全相同（ \(\mathcal{U}\)、\(\mathcal{B}\)、\(\mathcal{W}\) 不变）：
+    
+  1. 从袋中有放回的取出两个球，可以看作是从集合 \(\mathcal{U}\) 中选择两个元素构成的有序对 \((x,y)\)，其中 \(x\) 和 \(y\) 都属于集合 \(\mathcal{U}\)。根据集合的乘法原则，所有可能的取法数量为：
+  \[
+    |\mathcal{U} \times \mathcal{U}| = |\mathcal{U}| \times |\mathcal{U}| = 13 \times 13
+  \]
+  2. 从袋中有放回的取出两个球，这两个球都是黑球，可以看作是从集合 \(\mathcal{B}\) 中选择两个元素构成的有序对 \((x,y)\)，其中 \(x\) 和 \(y\) 都属于集合 \(\mathcal{B}\)。根据集合的乘法原则，所有可能的取法数量为：
+  \[
+    |\mathcal{B} \times \mathcal{B}| = |\mathcal{B}| \times |\mathcal{B}| = 7 \times 7
+  \]
+  3. 从袋中有放回的取出两个球，第一个球是白球，第二个球是黑球，可以看作是从集合 \(\mathcal{W}\) 和集合 \(\mathcal{B}\) 中选择两个元素构成的有序对 \((x,y)\)，其中 \(x\) 属于集合 \(\mathcal{W}\)，\(y\) 属于集合 \(\mathcal{B}\)。根据集合的乘法原则，所有可能的取法数量为：
+  \[
+    |\mathcal{W} \times \mathcal{B}| = |\mathcal{W}| \times |\mathcal{B}| = 6 \times 7
+  \]
+  4. 从袋中有放回的取出两个球，第一个球是黑球，第二个球是白球，可以看作是从集合 \(\mathcal{B}\) 和集合 \(\mathcal{W}\) 中选择两个元素构成的有序对 \((x,y)\)，其中 \(x\) 属于集合 \(\mathcal{B}\)，\(y\) 属于集合 \(\mathcal{W}\)。根据集合的乘法原则，所有可能的取法数量为：
+  \[
+    |\mathcal{B} \times \mathcal{W}| = |\mathcal{B}| \times |\mathcal{W}| = 7 \times 6
+  \]
+  \item 在无放回的情况下，无放回取球是有序过程（第一次和第二次取球的顺序会产生不同结果），因此所有可能的取法对应 “第一次取球的结果集合” 与 “第二次取球的结果集合” 的笛卡尔积。
+  
+  1. 第一次取球：结果集合为 \(\mathcal{U}\)，有 \(∣\mathcal{U}∣=13\) 种选择；第二次取球：由于无放回，袋中剩余 13−1=12 个球，结果集合为 “ \(\mathcal{U}\) 去掉第一次取的球”，有 12 种选择。我们将第二次取球的集合表示为 \(\mathcal{U}^{\prime}\)，并且 \(|\mathcal{U}^{\prime}| = 12\)。根据集合的乘法原则，所有可能的取法数量为：
+  \[
+  |\mathcal{U} \times \mathcal{U}^{\prime}| = |\mathcal{U}| \times |\mathcal{U}^{\prime}| = 13 \times 12
+  \]
+
+  2. 第一次取球：结果集合为 \(\mathcal{B}\)，有 \(∣\mathcal{B}∣=7\) 种选择；第二次取球：由于无放回，袋中剩余 7−1=6 个黑球，结果集合为 “ \(\mathcal{B}\) 去掉第一次取的黑球”，有 12 种选择。我们将第二次取球的集合表示为 \(\mathcal{B}^{\prime}\)，并且 \(|\mathcal{B}^{\prime}| = 6\)。根据集合的乘法原则，所有可能的取法数量为：
+  \[
+  |\mathcal{B} \times \mathcal{B}^{\prime}| = |\mathcal{B}| \times |\mathcal{B}^{\prime}| = 7 \times 6
+  \]
+
+  3. 第一次取球：结果集合为 \(\mathcal{B}\)，有 \(∣\mathcal{B}∣=7\) 种选择；第二次取球：由于无放回，袋中剩余 7−1=6 个黑球，但是白球不受影响，其数量不变，依旧是 \(\mathcal{W}\)，有 \(∣\mathcal{W}∣=6\) 种选择。根据集合的乘法原则，所有可能的取法数量为：
+  \[
+  |\mathcal{B} \times \mathcal{W}| = |\mathcal{B}| \times |\mathcal{W}| = 7 \times 6
+  \]
+
+  4. 情况跟3一致，就是顺序颠倒。
+  \end{itemize}
+
+  “第一个球是白球，第二个球是黑球”和“第一个球是黑球，第二个球是白球”都是取到一个白球，一个黑球
+\end{proof}
+
+\begin{proof}[例题 1.9 答案]
+  2. 对于第二问，首先我们可以把问题分成取24个球，3个白球，21个非白球的情况有多少种？答案是 \(\binom{24}{3}\)。
+
+  再思考，剩下21个非白球又要分出8个黑球，13个红球有多少种可能？答案是 \(\binom{21}{8}\)。
+
+  第一种情况和第二种情况可以构成笛卡尔积么？最终我们可不可以用乘法原则得到最后的结果：\(\binom{24}{3}\binom{21}{8}\)？
+
+  如果我们考虑取50个球，3个黑的，2个白的，5个红的，6个橙的，7个蓝的，剩下的都是绿球的种类一共有几种？你尝试列出对应的二项式序数。
+
+  3. 对于第三问，我们分出来取到的球和没有取到的球，问题就跟取黑球和白球的情况一样了（80个球里面25个是黑的，剩下的都是白的有多少种情况）。每个球都有取到和未被取到两种可能，对应于他是黑球还是白球。
+\end{proof}
+
+\end{document}
