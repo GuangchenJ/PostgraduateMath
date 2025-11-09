@@ -27,6 +27,7 @@
 % \usepackage{pifont}       % 确保 \ding 命令可用 (用于图标)
 % \usepackage{tcolorbox}    % 确保 tcolorbox 可用
 \usepackage{graphicx}
+\usepackage{multicol}
 \usepackage{fontawesome5}  % 用于提供图标，例如 \faPencil
 % 加载 tcolorbox 的 "skins" 和 "theorems" 库
 \tcbuselibrary{skins, theorems}  % 用于处理 \problem 命令的可选参数
@@ -117,9 +118,14 @@
 \section{一元函数积分学}
 \input{zhenti/gaoshu/yiyuanhanshujifenxue.tex}
 
-\section{微分方程}
+\section{常微分方程}
+
+\input{zhenti/gaoshu/ODE.tex}
+
 
 \section{多元函数微分学}
+
+\input{zhenti/gaoshu/duoyuanhanshuweifenxue.tex}
 
 \section{多元函数积分学}
 

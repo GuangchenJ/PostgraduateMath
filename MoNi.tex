@@ -110,30 +110,433 @@
 
 % \mainmatter
 
-\chapter{错题}
+\chapter{技巧整理}
 
-\input{moni/moni.tex}
-
-\chapter{缩写对应关系}
+\section{积分中常见三角等式识别}
 
 \begin{table}[h!]
 \centering
-\caption{缩写与全称对照表}
-\renewcommand{\arraystretch}{1.3} % 表格行距
-\setlength{\tabcolsep}{10pt} % 列间距
-\begin{tabular}{>{\bfseries}m{0.25\linewidth} m{0.65\linewidth}}
-\toprule
-\textbf{缩写} & \textbf{对应模拟卷} \\
-\midrule
-李武六 & 李永乐武忠祥冲刺 6 套卷 \\
-张八 & 张宇8套卷 \\
-超越 & 合工大超越5+5套卷 \\
-共创 & 合工大共创5套卷 \\
-欧三 & 欧几里得3套卷 \\
-李武冲三 & 李永乐武忠祥最后 3 套卷（名校版） \\
-张四 & 张宇4套卷 \\
-\bottomrule
+\caption{积分三角恒等式工具箱}
+\label{tab:trig_integrals}
+
+% --- *** 新增命令：调整行高 *** ---
+% 将行高设置为默认值的 1.5 倍。您可以修改 1.5 这个数值。
+\renewcommand{\arraystretch}{1.5}
+% --- *** 结束新增命令 *** ---
+
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{当你遇到...} & \textbf{优先考虑的策略} & \textbf{使用的恒等式} \\ \hline \hline
+
+$\cos(x) \pm 1$ & \textbf{半角/二倍角} (消除 $\pm 1$) & 
+    \begin{tabular}[c]{@{}l@{}} % 用于单元格内换行
+        $1-\cos(x) = 2\sin^2(x/2)$ \\ 
+        $1+\cos(x) = 2\cos^2(x/2)$
+    \end{tabular} \\ \hline
+
+$\sin^2(x)$ 或 $\cos^2(x)$ & \textbf{降幂} & 
+    \begin{tabular}[c]{@{}l@{}}
+        $\sin^2(x) = \frac{1-\cos(2x)}{2}$ \\ 
+        $\cos^2(x) = \frac{1+\cos(2x)}{2}$
+    \end{tabular} \\ \hline
+
+$\sin(ax)\cos(bx)$ 等 & \textbf{积化和差} & 
+    $\sin(A)\cos(B) = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$ \\ \hline
+
+$1 \pm \sin(x)$ (在分母) & \textbf{乘以共轭项} & 
+    $1 - \sin^2(x) = \cos^2(x)$ \\ \hline
+
+$\tan, \sec, \cot, \csc$ & \textbf{毕达哥拉斯恒等式} & 
+    \begin{tabular}[c]{@{}l@{}}
+        $1 + \tan^2(x) = \sec^2(x)$ \\ 
+        $1 + \cot^2(x) = \csc^2(x)$
+    \end{tabular} \\ \hline
 \end{tabular}
+% --- 恢复默认行高 (可选，以免影响后续表格) ---
+\renewcommand{\arraystretch}{1.0} 
 \end{table}
+
+\subsection{模式一：处理 $\cos(x) \pm 1$ （消除 $\pm 1$）}
+
+当看到 $\cos(x)$ 与 $1$ 相加减时，立即使用二倍角（或半角）公式将其变为单项。
+
+\begin{itemize}
+  \item $1 - \cos(2x) = 2\sin^2(x)$
+  \begin{itemize}
+    \item 变形 (令 $x = \frac{u}{2}$): $1 - \cos(u) = 2\sin^2\left(\frac{u}{2}\right)$
+  \end{itemize}
+  \item $1 + \cos(2x) = 2\cos^2(x)$
+  \begin{itemize}
+    \item 变形 (令 $x = \frac{u}{2}$): $1 + \cos(u) = 2\cos^2\left(\frac{u}{2}\right)$
+  \end{itemize}
+  \item \textbf{何时使用？}
+  \begin{itemize}
+    \item 当它们出现在分母时（如 $\int \frac{1}{1+\cos x} \mathrm{d}x$），或者当它们在根号下时（如 $\int \sqrt{1-\cos x} \mathrm{d}x$），效果拔群。
+  \end{itemize}
+\end{itemize}
+\vspace{3em}
+
+\subsection{模式二：处理 $\sin^2(x)$ 或 $\cos^2(x)$ （降幂）}
+
+当你需要直接对 $\sin^2(x)$ 或 $\cos^2(x)$ 积分时，它们很难处理。使用降幂公式（其实就是模式一的逆用）来消除平方。
+
+\begin{itemize}
+  \item $\sin^2(x) = \frac{1 - \cos(2x)}{2}$
+  \item $\cos^2(x) = \frac{1 + \cos(2x)}{2}$
+  \item \textbf{何时使用？}
+  \begin{itemize}
+    \item 直接对 $\sin^2(x)$, $\cos^2(x)$ (或它们的偶数次幂) 积分时。
+    \item 例： $\int \cos^2(x) \mathrm{d}x = \int \frac{1 + \cos(2x)}{2} \mathrm{d}x = \frac{1}{2}x + \frac{1}{4}\sin(2x) + C$
+  \end{itemize}
+\end{itemize}
+\vspace{3em}
+
+\textbf{\large 模式三：处理三角函数的乘积 （积化和差）}
+
+当你遇到不同频率的三角函数相乘时（如 $\sin(3x)\cos(2x)$），直接积分几乎是不可能的。这时使用积化和差公式将“乘积”变为“和差”。
+
+\begin{itemize}
+  \item $\sin(A)\cos(B) = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$
+  \item $\cos(A)\cos(B) = \frac{1}{2}[\cos(A+B) + \cos(A-B)]$
+  \item $\sin(A)\sin(B) = -\frac{1}{2}[\cos(A+B) - \cos(A-B)]$（注意这个负号）
+  \item \textbf{何时使用？}
+  \begin{itemize}
+    \item 积分 $\int \sin(ax)\cos(bx) \mathrm{d}x$ 或 $\int \cos(ax)\cos(bx) \mathrm{d}x$ 等。
+  \end{itemize}
+\end{itemize}
+\vspace{3em}
+
+\subsection{模式四：处理 $\frac{1}{1 \pm \sin(x)}$ （分母共轭）}
+
+我们知道 $1 \pm \cos(x)$ 用模式一解决。但 $1 \pm \sin(x)$ 没有直接的半角公式。技巧是乘以它的共轭项，强行制造出毕达哥拉斯恒等式。
+
+\begin{itemize}
+  \item 
+  \item \textbf{何时使用？}
+  \begin{itemize}
+    \item 积分形如 $\int \frac{1}{1 \pm \sin(x)} \mathrm{d}x$。
+  \end{itemize}
+\end{itemize}
+\vspace{3em}
+
+\subsection{模式五：处理 $\tan, \sec, \cot, \csc$ （毕达哥拉斯恒等式）}
+
+这是最基础的，但也是最强大的。当被积函数包含 $\tan, \sec$ 或 $\cot, \csc$ 时，它们是你的首选。
+
+\begin{itemize}
+  \item $\sin^2(x) + \cos^2(x) = 1$ 用于 $\sin, \cos$ 的奇次幂积分，例如 $\int \sin^3(x) \mathrm{d}x = \int \sin(x)(1-\cos^2(x)) \mathrm{d}x$）
+  \item $1 + \tan^2(x) = \sec^2(x)$
+  \item $1 + \cot^2(x) = \csc^2(x)$（注意这个负号）
+  \item \textbf{何时使用？}
+  \begin{itemize}
+    \item 例： 积分 $\int \tan^2(x) \mathrm{d}x$：
+    \[
+    \int (\sec^2(x) - 1) \mathrm{d}x = \tan(x) - x + C
+    \]
+    \item 例： 积分 $\int \tan^3(x)\sec(x) \mathrm{d}x$
+    \[
+    \int \tan(x) \cdot \tan^2(x) \cdot \sec(x) \mathrm{d}x = \int \tan(x) (\sec^2(x) - 1) \sec(x) \mathrm{d}x
+    \]
+    （然后使用 $u = \sec(x)$ 换元）
+  \end{itemize}
+\end{itemize}
+\vspace{3em}
+
+
+\section{微积分中的代数恒等式技巧}
+
+\begin{table}[h!]
+\centering
+\caption{微积分中的代数恒等式技巧}
+\label{tab:algebra_tricks}
+\renewcommand{\arraystretch}{1.8} % 增大行高
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{技巧名称} & \textbf{核心公式 (正向)} & \textbf{识别线索 (反向应用)} \\ \hline \hline
+
+\textbf{平方差} & $a^2 - b^2 = (a - b)(a + b)$ & 
+    \begin{tabular}[c]{@{}l@{}}
+        看到 $\sqrt{a} - \sqrt{b}$ (或其他 $a-b$ 形式) \\
+        $\implies$ 乘以 $(\sqrt{a} + \sqrt{b})$ 进行有理化
+    \end{tabular} \\ \hline
+
+\textbf{立方差} & $a^3 - b^3 = (a - b)(a^2 + ab + b^2)$ & 
+    \begin{tabular}[c]{@{}l@{}}
+        看到 $a^2 + ab + b^2$ \\
+        $\implies$ 缺 $(a-b)$，可凑 $a^3 - b^3$
+    \end{tabular} \\ \hline
+
+\textbf{立方和} & $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$ & 
+    \begin{tabular}[c]{@{}l@{}}
+        看到 $a^2 - ab + b^2$ \\
+        $\implies$ 缺 $(a+b)$，可凑 $a^3 + b^3$
+    \end{tabular} \\ \hline
+
+\textbf{立方根有理化} & $A - B = (\sqrt[3]{A} - \sqrt[3]{B})(\dots^2)$ & 
+    \begin{tabular}[c]{@{}l@{}}
+        看到 $\sqrt[3]{A} - \sqrt[3]{B}$ \\
+        $\implies$ 乘以 $(\sqrt[3]{A^2} + \sqrt[3]{AB} + \sqrt[3]{B^2})$
+    \end{tabular} \\ \hline
+
+\end{tabular}
+\renewcommand{\arraystretch}{1.0} % 恢复默认行高
+\end{table}
+
+\subsection{模式一：立方和/立方差}
+这个技巧的核心是：当看到“残缺”的二次项（$a^2 \pm ab + b^2$）时，主动去寻找（或乘以）那个“缺失”的一次项（$a \mp b$），从而凑出简洁的立方形式（$a^3 \pm b^3$）。
+
+\begin{itemize}
+    \item \textbf{核心模式：}
+    \begin{itemize}
+        \item 立方和：$a^3 + b^3 = (a + b)(a^2 - ab + b^2)$
+        \item 立方差：$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$
+    \end{itemize}
+
+    \item \textbf{识别线索（反向应用）：}
+    \begin{enumerate}
+        \item \textbf{线索：} 看到 $a^2 + ab + b^2$ （中间是 \textbf{+}）
+        \begin{itemize}
+            \item \textbf{反应：} 马上想到它“缺”一个 $(a - b)$。
+            \item \textbf{应用：} $\frac{1}{a^2 + ab + b^2} = \frac{a-b}{a^3 - b^3}$
+            \item \textit{例（$a=x, b=1$）：} 看到 $x^2 + x + 1 \implies$ 想到 $(x-1) \implies$ 凑出 $x^3 - 1$。
+        \end{itemize}
+        
+        \item \textbf{线索：} 看到 $a^2 - ab + b^2$ （中间是 \textbf{-}）
+        \begin{itemize}
+            \item \textbf{反应：} 马上想到它“缺”一个 $(a + b)$。
+            \item \textbf{应用：} $\frac{1}{a^2 - ab + b^2} = \frac{a+b}{a^3 + b^3}$
+            \item \textit{例（$a=x, b=1$）：} 看到 $x^2 - x + 1 \implies$ 想到 $(x+1) \implies$ 凑出 $x^3 + 1$。
+        \end{itemize}
+    \end{enumerate}
+
+    \item \textbf{常见考点：}
+    \begin{itemize}
+        \item \textbf{求极限：} $\lim_{x \to 1} \frac{x-1}{x^3-1}$
+        \item \textbf{有理函数积分：} $\int \frac{1}{x^3 - 1} \mathrm{d}x = \int \frac{1}{(x-1)(x^2+x+1)} \mathrm{d}x$ （拆分部分分式）。
+    \end{itemize}
+\end{itemize}
+
+\subsection{模式二：平方差}
+
+\begin{itemize}
+    \item \textbf{核心模式：} $a^2 - b^2 = (a - b)(a + b)$
+
+    \item \textbf{识别线索：}
+    \begin{itemize}
+        \item \textbf{线索：} 看到 $a-b$ 或 $a+b$，特别是涉及\textbf{根号}时。
+        \item \textbf{反应：} \textbf{分子/分母有理化}。
+        \item \textbf{应用：} $\frac{1}{\sqrt{a} - \sqrt{b}} = \frac{\sqrt{a} + \sqrt{b}}{(\sqrt{a} - \sqrt{b})(\sqrt{a} + \sqrt{b})} = \frac{\sqrt{a} + \sqrt{b}}{a - b}$
+    \end{itemize}
+
+    \item \textbf{常见考点：}
+    \begin{itemize}
+        \item \textbf{求极限：} 几乎所有带根号的 $\frac{0}{0}$ 型极限。
+            \textit{例：} $\lim_{x \to 0} \frac{\sqrt{1+x} - 1}{x} \implies$ 乘以 $(\sqrt{1+x} + 1)$。
+        \item \textbf{三角函数积分：} $\int \frac{1}{1 - \sin x} \mathrm{d}x \implies$ 乘以 $(1 + \sin x)$，利用 $1 - \sin^2 x = \cos^2 x$。
+    \end{itemize}
+\end{itemize}
+
+\subsection{模式三：根式的立方和/立方差}
+
+\begin{itemize}
+    \item \textbf{核心模式：}
+    \begin{itemize}
+        \item $A - B = (\sqrt[3]{A} - \sqrt[3]{B})(\sqrt[3]{A^2} + \sqrt[3]{A}\sqrt[3]{B} + \sqrt[3]{B^2})$
+        \item $A + B = (\sqrt[3]{A} + \sqrt[3]{B})(\sqrt[3]{A^2} - \sqrt[3]{A}\sqrt[3]{B} + \sqrt[3]{B^2})$
+    \end{itemize}
+
+    \item \textbf{识别线索：}
+    \begin{itemize}
+        \item \textbf{线索：} 看到 $\sqrt[3]{a} - \sqrt[3]{b}$ 或 $\sqrt[3]{a} + \sqrt[3]{b}$。
+        \item \textbf{反应：} \textbf{根式有理化}，补全那个二次项。
+        \item \textbf{应用：} $\frac{1}{\sqrt[3]{x} - 1} = \frac{\sqrt[3]{x^2} + \sqrt[3]{x} + 1}{(\sqrt[3]{x} - 1)(\dots)} = \frac{\sqrt[3]{x^2} + \sqrt[3]{x} + 1}{x - 1}$
+    \end{itemize}
+    
+    \item \textbf{常见考点：}
+    \begin{itemize}
+        \item \textbf{求极限：} 涉及\textbf{立方根}的 $\frac{0}{0}$ 型极限。
+        \textit{例：} $\lim_{x \to 1} \frac{\sqrt[3]{x} - 1}{x - 1}$
+        \begin{align*}
+            \text{正向：} & \lim_{x \to 1} \frac{\sqrt[3]{x} - 1}{(\sqrt[3]{x})^3 - 1^3} = \lim_{x \to 1} \frac{\sqrt[3]{x} - 1}{(\sqrt[3]{x} - 1)(\sqrt[3]{x^2} + \sqrt[3]{x} + 1)} = \frac{1}{3} \\
+            \text{反向：} & \lim_{x \to 1} \frac{(\sqrt[3]{x} - 1)(\sqrt[3]{x^2} + \dots)}{(x - 1)(\sqrt[3]{x^2} + \dots)} = \lim_{x \to 1} \frac{x - 1}{(x - 1)(\dots)} = \frac{1}{3}
+        \end{align*}
+    \end{itemize}
+\end{itemize}
+
+\subsection{模式四：万能公式（三角函数 $\to$ 有理函数）}
+
+\begin{itemize}
+    \item \textbf{核心模式：}
+    \begin{itemize}
+        \item 令 $u = \tan(x/2)$
+        \item 则： $\sin(x) = \frac{2u}{1+u^2}$, $\cos(x) = \frac{1-u^2}{1+u^2}$, $\mathrm{d}x = \frac{2}{1+u^2} du$
+    \end{itemize}
+    
+    \item \textbf{识别线索：}
+    \begin{itemize}
+        \item \textbf{线索：} 看到复杂的、只含 $\sin(x), \cos(x)$ 的分式，且其他技巧失效。
+        \item \textbf{反应：} \textbf{万能代换}。
+    \end{itemize}
+
+    \item \textbf{常见考点（三角积分）：}
+    \textit{例：} $\int \frac{1}{1 + \sin(x) - \cos(x)} \mathrm{d}x$
+    \begin{align*}
+        \text{代入后：} & \int \frac{1}{1 + \frac{2u}{1+u^2} - \frac{1-u^2}{1+u^2}} \cdot \frac{2}{1+u^2} du \\
+        = & \int \frac{1+u^2}{(1+u^2) + 2u - (1-u^2)} \cdot \frac{2}{1+u^2} du \\
+        = & \int \frac{2}{2u + 2u^2} du = \int \frac{1}{u(1+u)} du \quad \text{(问题转化为部分分式)}
+    \end{align*}
+\end{itemize}
+
+\subsection{模式五：配方法（Completing the Square）}
+
+\begin{itemize}
+    \item \textbf{核心模式：} $ax^2 + bx + c \implies a(x+p)^2 + q$
+    
+    \item \textbf{识别线索：}
+    \begin{itemize}
+        \item \textbf{线索：} 分母出现\textbf{不可因式分解}的二次项。
+        \item \textbf{反应：} \textbf{配方法}，凑出 $\arctan$ 或 $\ln$ 的积分形式。
+        \item \textbf{应用：} $x^2 + x + 1 \implies x^2 + 2 \cdot x \cdot (\frac{1}{2}) + (\frac{1}{2})^2 - (\frac{1}{2})^2 + 1 = (x + \frac{1}{2})^2 + \frac{3}{4}$
+    \end{itemize}
+
+    \item \textbf{常见考点（有理函数积分）：}
+    \textit{例：} $\int \frac{1}{x^2+x+1} \mathrm{d}x = \int \frac{1}{(x + \frac{1}{2})^2 + (\frac{\sqrt{3}}{2})^2} \mathrm{d}x$
+    \begin{itemize}
+        \item 令 $u = x + \frac{1}{2}$， $a = \frac{\sqrt{3}}{2}$
+        \item 得到标准 $\arctan$ 积分：
+        $$ \frac{1}{a} \arctan\left(\frac{u}{a}\right) + C = \frac{2}{\sqrt{3}} \arctan\left(\frac{2x+1}{\sqrt{3}}\right) + C $$
+    \end{itemize}
+\end{itemize}
+
+\section{抽象函数的导数构造技巧}
+
+\subsection{构造导数法（利用导数的定义）}
+
+\begin{itemize}
+    \item \textbf{核心模式：} 利用导数定义 $f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$ 构造函数 $f(x)$。
+    
+    \item \textbf{识别线索：}
+    \begin{itemize}
+        \item \textbf{线索：} 当你看到题目同时给出这两个条件时，必须立刻想到用导数定义：
+        \begin{itemize}
+          \item 函数方程： 给了 $f(x+y)$, $f(x-y)$ 或 $f(x)f(y)$ 等。
+          \item 可导信息： 给了 $f'(0)$ 的值，或只说了 $f(x)$ 可导。
+        \end{itemize}
+        \textbf{暗示}：给你 $f'(0)$，就是逼着你用 $f'(x)$ 的定义，因为 $f'(0)$ 这个条件只有在导数定义式中才能被“塞进去”。
+        \item \textbf{反应：} 直接从导数定义出发，逐步构造 $f(x)$。
+    \end{itemize}
+    \item \textbf{例：}
+    \begin{itemize}
+        \item \problem[张八-2-20]{设函数 $\displaystyle f(x)$ 满足 $\displaystyle f(x-y) = f(x) f(y) + \sin x \sin y$，其中 \(x, y\) 为任意常数，且 $\displaystyle f(0) = 1$, $\displaystyle f'(0)$ 存在。求 $\displaystyle f(x)$。}
+        \vspace{-5em}
+        \[
+        f(x) = \cos x
+        \]
+        \item 设 $f(x)$ 可导， $f(x+y) = f(x)f(y)$，$f(0)=1$ 且 $f'(0) = k$。求 $f(x)$
+        \[
+        f(x) = \mathrm{e}^{kx}
+        \]
+        \item 设 $f(x)$ 可导， $f(x+y) = f(x) + f(y)$，$f(0)=0$ 且 $f'(0) = k$。求 $f(x)$。
+        \[
+        f(x) = kx
+        \]
+    \end{itemize}
+\end{itemize}
+
+\section{定积分本质上是一个值}
+
+请务必记住这句话“\text{定积分本质上是一个值}”。在一重积分、二重积分等等场景下，一定要记住这句话。
+一个函数 $f$ 的定义中，等号右边又包含了 $f$ 自己的定积分时，这个函数其实是一个常数函数，其值等于该定积分的值。
+
+其解题步骤如下：
+\begin{enumerate}
+  \item 设常数：立刻设这个定积分为一个（目前未知的）常数 $K$。$K = \iint_D f(x, y)\mathrm{d}x\mathrm{d}y$
+  \item 改写 $f(x, y)$，用 $K$ 替换掉原方程中的积分项，得到 $f(x, y)$ 的一个显式表达式：$f(x, y) = \dots + (\dots) \cdot K$
+  \item 反解 $K$，我们利用 $K$ 的定义，建立一个关于 $K$ 的“自洽方程”：$K = \iint_D f(x, y)\mathrm{d}x\mathrm{d}y$，把第2步得到的 $f(x, y)$ 表达式代入这个积分中。
+  \item 求解方程，计算上一步的积分，解出 $K$ 的具体值。
+\end{enumerate}
+
+\problem[李武六-2-4]{设 $\displaystyle f(x,y)$ 连续, 且 $\displaystyle f(x,y) = \mathrm{e}^{x^2+y^2} + xy \iint\limits_D f(x,y) \mathrm{d}x \mathrm{d}y$, 其中 $\displaystyle D = \{(x,y) | 0 \le x \le 1, 0 \le y \le 1\}$, 则 $\displaystyle \frac{\partial^2 f}{\partial x \partial y}$ 等于~(~\quad~)
+\begin{tasks}(2)
+  \task $\displaystyle 4xy\mathrm{e}^{x^2+y^2} + \frac{9}{16}(\mathrm{e}-1)^2.$
+  \task $\displaystyle 2xy\mathrm{e}^{x^2+y^2} + \frac{9}{16}(\mathrm{e}-1).$
+  \task $\displaystyle 4xy\mathrm{e}^{x^2+y^2} + \frac{9}{32}(\mathrm{e}-1)^2.$
+  \task $\displaystyle 4xy\mathrm{e}^{x^2+y^2} + \frac{9}{16}(\mathrm{e}-1).$
+\end{tasks}}
+
+\section{求矩阵的多次幂}
+
+例如，求矩阵 \(\displaystyle \mathbf{A}^{100}\)，我们期望使用对角化（\(\displaystyle \mathbf{A} = \mathbf{PD} \mathbf{P}^{-1}\)），例如
+\problem[(16-1,2,3)]{已知矩阵
+\[ A = \begin{pmatrix} 0 & -1 & 1 \\ 2 & -3 & 0 \\ 0 & 0 & 0 \end{pmatrix}. \]
+\begin{enumerate}
+\item[(1)] 求 $\displaystyle A^{99}$;
+\end{enumerate}}
+
+但 \(\displaystyle \mathbf{A}\) 可能无法相似对角化，这时候我们需要想到使用相似变换。
+\begin{itemize}
+  \item 即根据定义，存在可逆 $\mathbf{P}$ 使得 $\mathbf{A} = \mathbf{P} B \mathbf{P}^{-1}$。
+  \item $\mathbf{A}^{100} = (\mathbf{P} \mathbf{B} \mathbf{P}^{-1})(\mathbf{P} \mathbf{B} \mathbf{P}^{-1})\dots(\mathbf{P} \mathbf{B} \mathbf{P}^{-1})$
+  \item $\mathbf{A}^{100} = \mathbf{P} \mathbf{B} (\mathbf{P}^{-1}\mathbf{P}) \mathbf{B} (\mathbf{P}^{-1}\mathbf{P}) \dots \mathbf{B} \mathbf{P}^{-1}$
+  \item $\mathbf{A}^{100} = \mathbf{P} \mathbf{B}^{100} \mathbf{P}^{-1}$
+\end{itemize}
+
+只要我们能找到 $\mathbf{P}$ 和 $\mathbf{B}^{100}$，即使 $\mathbf{B}$ 不是对角阵，我们也能求出 $\mathbf{A}^{100}$。
+
+\problem[张八-2-21]{设矩阵 $\displaystyle A = \begin{pmatrix} -1 & 0 & 1 \\ 1 & 2 & 0 \\ a & 0 & 3 \end{pmatrix}$ 与 $\displaystyle B = \begin{pmatrix} 1 & b & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 2 \end{pmatrix}$ 相似, 且 $\displaystyle A\boldsymbol{x} = \boldsymbol{x} + (b, -b, 2b)^\mathrm{T}$ 的一个解为 $\displaystyle (0, -1, 1)^\mathrm{T}$, 求
+\begin{enumerate}
+\item[(1)] $\displaystyle a, b$ 的值;
+\item[(2)] $\displaystyle A^{100}$.
+\end{enumerate}}
+
+\section{莱布尼茨积分法则}
+
+设含参变量 \(x\) 的积分 \(\displaystyle F(x) = \int_{a(x)}^{b(x)} f(x, t) dt\)，则其导数公式为：
+\begin{itemize}
+  \item 基础形式：\(\displaystyle F'(x) = \int_{a(x)}^{b(x)} \frac{\partial f(x, t)}{\partial x} dt + f(x, b(x)) \cdot b'(x) - f(x, a(x)) \cdot a'(x)\)
+  \item 若积分上下限 \(\displaystyle a, b\) 为常数，简化为 \(\displaystyle F'(x) = \int_{a}^{b} \frac{\partial f(x, t)}{\partial x} dt\)
+\end{itemize}
+\begin{note}
+使用变现积分求导公式，即 \(\displaystyle F'(x) = f(b(x)) \cdot b'(x) - f(a(x)) \cdot a'(x)\)，如果被积分函数是 \(\displaystyle f(x, t)\)，即既有 \(t\) 又有 \(x\)，是不可以直接使用。原因就是这里的莱布尼茨积分法则。
+\end{note}
+
+\problem[P87-5 (20-1)]{设函数 $\displaystyle f(x,y) = \int_0^{xy} \mathrm{e}^{xt^2} \mathrm{d}t$, 则 $\displaystyle \left. \frac{\partial^2 f}{\partial x \partial y} \right|_{(1,1)} = \underline{\hspace{4em}}. $}
+\vspace{-5em}
+\ansat{291；【十年真题】 - 考点一：多元复合函数的偏导数与全微分的计算 - 5}
+
+\section{使用克拉默法则，求解多元隐函数的偏导数}
+
+多元函数的隐函数偏导，如果构成方程组，可以考虑使用克拉默法则简化计算。
+
+\problem[P89-变式2 (99-1)]{设 $\displaystyle y=y(x)$, $\displaystyle z=z(x)$ 是由方程 $\displaystyle z=xf(x+y)$ 和 $\displaystyle F(x,y,z)=0$ 所确定的函数, 其中 $\displaystyle f$ 和 $\displaystyle F$ 分别具有一阶连续导数和一阶连续偏导数, 求 $\displaystyle \frac{\mathrm{d}z}{\mathrm{d}x}$.}
+\vspace{-5em}
+\ansat{292；【十年真题】 - 考点二：多元隐函数的偏导数与全微分的计算 - 变式2}
+
+
+% \chapter{错题}
+
+% \input{moni/moni.tex}
+
+% \chapter{缩写对应关系}
+
+% \begin{table}[h!]
+% \centering
+% \caption{缩写与全称对照表}
+% \renewcommand{\arraystretch}{1.3} % 表格行距
+% \setlength{\tabcolsep}{10pt} % 列间距
+% \begin{tabular}{>{\bfseries}m{0.25\linewidth} m{0.65\linewidth}}
+% \toprule
+% \textbf{缩写} & \textbf{对应模拟卷} \\
+% \midrule
+% 李武六 & 李永乐武忠祥冲刺 6 套卷 \\
+% 张八 & 张宇8套卷 \\
+% 超越 & 合工大超越5+5套卷 \\
+% 共创 & 合工大共创5套卷 \\
+% 欧三 & 欧几里得3套卷 \\
+% 李武冲三 & 李永乐武忠祥最后 3 套卷（名校版） \\
+% 张四 & 张宇4套卷 \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
 
 \end{document}

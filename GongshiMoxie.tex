@@ -1,0 +1,497 @@
+\documentclass[lang=cn,math=mtpro2,10pt,scheme=chinese,black]{elegantbook}
+
+\title{2026年考研数学模拟卷错题整理}
+\subtitle{参考对应的考研数学模拟卷答案}
+
+\author{Guangchen Jiang}
+% \institute{Elegant\LaTeX{} Program}
+\date{2025/12/31}
+\version{4.5}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\usepackage{amsmath}   % 用于 \pmatrix 矩阵环境
+\usepackage{tasks}     % 用于水平排列选项
+\usepackage{xifthen} 
+\usepackage{pifont}
+% \usepackage{ifthen}       % 确保 \ifthenelse 命令可用
+% \usepackage{pifont}       % 确保 \ding 命令可用 (用于图标)
+% \usepackage{tcolorbox}    % 确保 tcolorbox 可用
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fontawesome5}  % 用于提供图标，例如 \faPencil
+% 加载 tcolorbox 的 "skins" 和 "theorems" 库
+\tcbuselibrary{skins, theorems}  % 用于处理 \problem 命令的可选参数
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\makeatother % 恢复@的原始含义
+
+% 定义题目计数器
+\newcounter{problemcounter}[section]
+
+\renewcommand{\problem}[2][]{
+  \par\medskip\noindent 
+  %
+  % --- 下面的代码不变 ---
+  \stepcounter{problemcounter}% 计数器加 1 (第一题变1, 第二题变2...)
+  \arabic{problemcounter}.% 打印题号 1.
+  \ifthenelse{\isempty{#1}}{}{ 【#1】}% 打印可选信息 (25-2)
+  \space % 打印一个空格
+  #2 % 打印题目正文
+  \vspace{5em}
+}
+\renewcommand{\proofname}{答案}
+\renewcommand{\notename}{注}
+
+\newcommand{\probtagged}[2][]{%
+  \par\noindent%
+  % 左侧小图标
+  \makebox[0pt][r]{%
+    \scriptsize\color{orange!90}\faExclamationTriangle\quad%
+  }%
+  % 正文部分
+  \stepcounter{problemcounter}%
+  \arabic{problemcounter}.%
+  \ifthenelse{\isempty{#1}}{}{ 【#1】}%
+  \space #2%
+  \par%
+  \vspace{5em}
+}
+
+% (可选) 全局设置 tasks 环境的样式
+% 这里我们设置为4列，标签格式为 A. B. C. ...
+\settasks{
+  counter-format = (\Alph*), % 标签格式为 A. B. ...
+  label-width = 2em,         % 标签宽度
+  item-indent = 3em,         % 选项内容缩进
+}
+\newcommand{\ansat}[1]{%
+  \par\nobreak % <--- 关键解决方案：结束上文，并禁止在此处分页
+  \vspace{0.3em} % 在 proof 环境前添加您想要的间距
+  \begin{proof}
+    P#1
+  \end{proof}
+  \vspace{5em} % <--- 修正：在 proof 环境后添加一些间距 (例如 0.5em)
+}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% \usepackage{setspace} 
+% \setstretch{1.3}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{caption}
+
+\geometry{a4paper, margin=1in}
+\captionsetup[table]{skip=10pt}
+
+\begin{document}
+
+\chapter{高数}
+
+\section{求和公式}
+
+\begin{multicols}{2}
+  \begin{itemize}
+        \item 等比数列求和公式：\(\displaystyle S_n = \frac{1 - q^n}{1 - q}\)
+        \item 等差数列求和公式：\(\displaystyle S_n = \frac{n \left(a_1 + a_n\right)}{2}\)
+    \end{itemize}
+\end{multicols}
+
+\section{三角函数特殊值}
+
+\begin{multicols}{4}
+\begin{itemize}
+  \setstretch{3}
+  % 正弦函数
+  \item \( \displaystyle \sin 0 = 0 \)
+  \item \( \displaystyle \sin \frac{\pi}{6} = \frac{1}{2} \)
+  \item \( \displaystyle \sin \frac{\pi}{4} = \frac{\sqrt{2}}{2} \)
+  \item \( \displaystyle \sin \frac{\pi}{3} = \frac{\sqrt{3}}{2} \)
+  \item \( \displaystyle \sin \frac{\pi}{2} = 1 \)
+  \item \( \displaystyle \sin \pi = 0 \)
+  \item \( \displaystyle \sin \frac{3\pi}{2} = -1 \)
+  \item \( \displaystyle \sin 2\pi = 0 \)
+  % 余弦函数
+  \item \( \displaystyle \cos 0 = 1 \)
+  \item \( \displaystyle \cos \frac{\pi}{6} = \frac{\sqrt{3}}{2} \)
+  \item \( \displaystyle \cos \frac{\pi}{4} = \frac{\sqrt{2}}{2} \)
+  \item \( \displaystyle \cos \frac{\pi}{3} = \frac{1}{2} \)
+  \item \( \displaystyle \cos \frac{\pi}{2} = 0 \)
+  \item \( \displaystyle \cos \pi = -1 \)
+  \item \( \displaystyle \cos \frac{3\pi}{2} = 0 \)
+  \item \( \displaystyle \cos 2\pi = 1 \)
+\end{itemize}
+\end{multicols}
+
+\vspace{1em}
+
+\begin{multicols}{4}
+\begin{itemize}
+  \setstretch{3}
+  \item \( \displaystyle \tan 0 = 0 \)
+  \item \( \displaystyle \tan \frac{\pi}{6} = \frac{\sqrt{3}}{3} \)
+  \item \( \displaystyle \tan \frac{\pi}{4} = 1 \)
+  \item \( \displaystyle \tan \frac{\pi}{3} = \sqrt{3} \)
+  \item \( \displaystyle \lim_{x \to \frac{\pi}{2}} \tan x = \infty \)
+  \item \( \displaystyle \tan \pi = 0 \)
+  \item \( \displaystyle \lim_{x \to \frac{3\pi}{2}} \tan x = \infty \)
+  \item \( \displaystyle \tan 2\pi = 0 \)
+  \item \( \displaystyle \lim_{x \to 0} \cot x = \infty \)
+  \item \( \displaystyle \cot \frac{\pi}{6} = \sqrt{3} \)
+  \item \( \displaystyle \cot \frac{\pi}{4} = 1 \)
+  \item \( \displaystyle \cot \frac{\pi}{3} = \frac{\sqrt{3}}{3} \)
+  \item \( \displaystyle \cot \frac{\pi}{2} = 0 \)
+  \item \( \displaystyle \lim_{x \to \pi} \cot x = \infty \)
+  \item \( \displaystyle \cot \frac{3\pi}{2} = 0 \)
+  \item \( \displaystyle \lim_{x \to 2\pi} \cot x = \infty \)
+\end{itemize}
+\end{multicols}
+
+\vspace{1em}
+
+\begin{multicols}{4}
+\begin{itemize}
+  \setstretch{3}
+  \item \( \displaystyle \arcsin 0 = 0 \)
+  \item \( \displaystyle \arcsin \frac{1}{2} = \frac{\pi}{6} \)
+  \item \( \displaystyle \arcsin \frac{\sqrt{2}}{2} = \frac{\pi}{4} \)
+  \item \( \displaystyle \arcsin \frac{\sqrt{3}}{2} = \frac{\pi}{3} \)
+  \item \( \displaystyle \arcsin 1 = \frac{\pi}{2} \)
+  \item \( \displaystyle \arccos 1 = 0 \)
+  \item \( \displaystyle \arccos \frac{\sqrt{3}}{2} = \frac{\pi}{6} \)
+  \item \( \displaystyle \arccos \frac{\sqrt{2}}{2} = \frac{\pi}{4} \)
+  \item \( \displaystyle \arccos \frac{1}{2} = \frac{\pi}{3} \)
+  \item \( \displaystyle \arccos 0 = \frac{\pi}{2} \)
+\end{itemize}
+\end{multicols}
+
+\section{反三角函数等式}
+
+\begin{multicols}{3}
+\begin{itemize}
+  \setstretch{3}
+  \item \( \displaystyle \sin(\arccos x) = \sqrt{1-x^2} \)
+  \item \( \cos(\arcsin x) = \sqrt{1-x^2} \)
+  \item \( \arcsin x + \arccos x = \frac{\pi}{2} \)
+\end{itemize}
+\end{multicols}
+
+\section{三角函数公式}
+
+(1) 常见恒等式处理
+
+\begin{itemize}
+  \setstretch{3}
+  \item 当分母（如 $\int \frac{1}{1+\cos x} \mathrm{d}x$），或者根号下出现时（如 $\int \sqrt{1-\cos x} \mathrm{d}x$）
+  \begin{itemize}
+    \item $ \displaystyle 1-\cos(x) = 2\sin^2(x/2)$，令 $ \displaystyle x = \frac{u}{2}$: $ \displaystyle 1 - \cos(u) = 2\sin^2\left(\frac{u}{2}\right)$
+    \item $ \displaystyle 1+\cos(x) = 2\cos^2(x/2)$，令 $ \displaystyle x = \frac{u}{2}$: $ \displaystyle 1 + \cos(u) = 2\cos^2\left(\frac{u}{2}\right)$
+  \end{itemize}
+  \item 直接对 $ \displaystyle \sin^2(x)$ 或 $\cos^2(x)$ 积分时
+  \vspace{-2em}
+  \begin{multicols}{2}
+  \begin{itemize}
+    \item $ \displaystyle \sin^2(x) = \frac{1 - \cos(2x)}{2}$
+    \item $ \displaystyle \cos^2(x) = \frac{1 + \cos(2x)}{2}$
+  \end{itemize}
+  \end{multicols}
+  \item 不同频率的三角函数相乘时（如 $\sin(3x)\cos(2x)$）：积化和差公式
+  \item 处理 $ \displaystyle \frac{1}{1 \pm \sin(x)}$ （分母共轭）
+  \begin{itemize}
+    \item $\displaystyle \frac{1}{1 + \sin(x)} = \frac{1}{1 + \sin(x)} \cdot \frac{1 - \sin(x)}{1 - \sin(x)} = \frac{1 - \sin(x)}{1 - \sin^2(x)} = \frac{1 - \sin(x)}{\cos^2(x)}$
+    \item 然后拆分：\(\displaystyle \frac{1}{\cos^2(x)} - \frac{\sin(x)}{\cos^2(x)} = \sec^2(x) - \sec(x)\tan(x)\)
+  \end{itemize}
+\end{itemize}
+
+(2) 倍角公式
+$$ \sin 2\alpha = 2 \sin \alpha \cos \alpha, \quad \cos 2\alpha = \cos^2 \alpha - \sin^2 \alpha = 1 - 2\sin^2 \alpha = 2\cos^2 \alpha - 1, $$
+$$ \sin 3\alpha = -4\sin^3 \alpha + 3\sin \alpha, \quad \cos 3\alpha = 4\cos^3 \alpha - 3\cos \alpha, $$
+$$ \tan 2\alpha = \frac{2 \tan \alpha}{1 - \tan^2 \alpha}, \quad \cot 2\alpha = \frac{\cot^2 \alpha - 1}{2 \cot \alpha} $$
+
+\vspace{1em}
+(3) 半角公式
+$$ \sin^2 \frac{\alpha}{2} = \frac{1}{2}(1 - \cos \alpha), \quad \cos^2 \frac{\alpha}{2} = \frac{1}{2}(1 + \cos \alpha), \text{ (降幂公式)} $$
+$$ \sin \frac{\alpha}{2} = \pm \sqrt{\frac{1 - \cos \alpha}{2}}, \quad \cos \frac{\alpha}{2} = \pm \sqrt{\frac{1 + \cos \alpha}{2}}, $$
+$$ \tan \frac{\alpha}{2} = \frac{1 - \cos \alpha}{\sin \alpha} = \frac{\sin \alpha}{1 + \cos \alpha} = \pm \sqrt{\frac{1 - \cos \alpha}{1 + \cos \alpha}}, $$
+$$ \cot \frac{\alpha}{2} = \frac{\sin \alpha}{1 - \cos \alpha} = \frac{1 + \cos \alpha}{\sin \alpha} = \pm \sqrt{\frac{1 + \cos \alpha}{1 - \cos \alpha}} $$
+
+\vspace{1em}
+(4) 和差公式
+$$ \sin(\alpha \pm \beta) = \sin \alpha \cos \beta \pm \cos \alpha \sin \beta, \quad \cos(\alpha \pm \beta) = \cos \alpha \cos \beta \mp \sin \alpha \sin \beta, $$
+$$ \tan(\alpha \pm \beta) = \frac{\tan \alpha \pm \tan \beta}{1 \mp \tan \alpha \tan \beta}, \quad \cot(\alpha \pm \beta) = \frac{\cot \alpha \cot \beta \mp 1}{\cot \beta \pm \cot \alpha} $$
+$$ \tan(\frac{\pi}{4} - \alpha) = \frac{1 - \tan \alpha}{1 + \tan \alpha} $$
+
+\vspace{1em}
+
+(5) 积化和差与和差化积公式
+
+① 积化和差
+$$ \sin \alpha \cos \beta = \frac{1}{2}[\sin(\alpha + \beta) + \sin(\alpha - \beta)], \quad \cos \alpha \sin \beta = \frac{1}{2}[\sin(\alpha + \beta) - \sin(\alpha - \beta)], $$
+$$ \cos \alpha \cos \beta = \frac{1}{2}[\cos(\alpha + \beta) + \cos(\alpha - \beta)], \quad \sin \alpha \sin \beta = \frac{1}{2}[\cos(\alpha - \beta) - \cos(\alpha + \beta)] $$
+
+② 和差化积
+$$ \sin \alpha + \sin \beta = 2 \sin \frac{\alpha+\beta}{2} \cos \frac{\alpha-\beta}{2}, \quad \sin \alpha - \sin \beta = 2 \sin \frac{\alpha-\beta}{2} \cos \frac{\alpha+\beta}{2}, $$
+$$ \cos \alpha + \cos \beta = 2 \cos \frac{\alpha+\beta}{2} \cos \frac{\alpha-\beta}{2}, \quad \cos \alpha - \cos \beta = -2 \sin \frac{\alpha+\beta}{2} \sin \frac{\alpha-\beta}{2} $$
+
+\vspace{1em}
+
+(6) 万能公式
+
+若 $u = \tan \frac{x}{2} \; (-\pi < x < \pi)$，则 $\sin x = \displaystyle \frac{2u}{1+u^2}$，$\cos x = \displaystyle \frac{1-u^2}{1+u^2}$.
+
+\section{因式分解公式}
+
+\begin{multicols}{2}
+\begin{itemize}
+    \setstretch{3}
+    \item \( a^3 - b^3 = (a - b)(a^2 + ab + b^2) \)
+    \item \( a^3 + b^3 = (a + b)(a^2 - ab + b^2) \)
+\end{itemize}
+\end{multicols}
+
+\section{常用等价无穷小}
+
+当 \(x \to 0\) 时：
+\begin{multicols}{3}
+\begin{itemize}
+    \setstretch{3}
+    \item \( \displaystyle \sin x \sim x \)
+    \item \( \displaystyle \tan x \sim x \)
+    \item \( \displaystyle \arcsin x \sim x \)
+    \item \( \displaystyle \arctan x \sim x \)
+    \item \( \displaystyle \ln(1+x) \sim x \)
+    \item \( \displaystyle \mathrm{e}^x - 1 \sim x \)
+    \item \( \displaystyle a^x - 1 \sim x \ln a \)
+    \item \( \displaystyle 1 - \cos x \sim \frac{1}{2}x^2 \)
+    \item \( \displaystyle (1+x)^a - 1 \sim ax \)
+\end{itemize}
+\end{multicols}
+
+\section{泰勒展开}
+\begin{itemize}
+    \setstretch{3}
+    \item 泰勒展开的佩亚诺余项：
+
+\( \displaystyle f(x) = f(0) + \frac{f'(0)}{1!}x + \frac{f''(0)}{2!}x^2 + \frac{f^{(3)}(0)}{3!}x^3 + \cdots + \frac{f^{(n)}(0)}{n!}x^n + o(x^n) \)
+    \item 泰勒展开的拉格朗日余项：
+    
+\( \displaystyle f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!} (x - x_0)^k + \frac{f^{(n+1)}(\xi)}{(n+1)!} (x - x_0)^{n+1}\)
+\end{itemize}
+
+\subsection{常用麦克劳林公式}
+
+\begin{multicols}{2}
+\begin{itemize}
+    \setstretch{3}
+    \item \( \displaystyle \sin x = x - \frac{x^3}{3!} + o(x^{3}) \)
+    \item \( \displaystyle \cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + o(x^{4}) \)
+    \item\( \displaystyle \arcsin x = x + \frac{x^3}{3!} + o(x^{3}) \)
+    \item \( \displaystyle \tan x = x + \frac{x^3}{3} + o(x^{3}) \)
+    \item \( \displaystyle \arctan x = x - \frac{x^3}{3} + o(x^{3}) \)
+    \item \( \displaystyle \ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} + o(x^3) \)
+    \item \( \displaystyle \mathrm{e}^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + o(x^3) \)
+    \item \( \displaystyle (1+x)^\alpha = 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 +  o(x^2) \)
+\end{itemize}
+\end{multicols}
+
+\section{基本求导公式}
+
+\begin{multicols}{3}
+\begin{itemize}
+    \setstretch{3}
+    \item \( \displaystyle (\ln|x|)' = \frac{1}{x} \)
+    \item \( \displaystyle ( \sin x )' = \cos x \)
+    \item \( \displaystyle ( \cos x )' = -\sin x \)
+    \item \( \displaystyle ( \arcsin x )' = \frac{1}{\sqrt{1-x^2}} \)
+    \item \( \displaystyle ( \arccos x )' = -\frac{1}{\sqrt{1-x^2}} \)
+    \item \( \displaystyle ( \tan x )' = \sec^2 x \)
+    \item \( \displaystyle ( \cot x )' = -\csc^2 x \)
+    \item \( \displaystyle ( \arctan x )' = \frac{1}{1+x^2} \)
+    \item \( \displaystyle ( \text{arccot} x )' = -\frac{1}{1+x^2} \)
+    \item \( \displaystyle ( \sec x )' = \sec x \tan x \)
+    \item \( \displaystyle ( \csc x )' = -\csc x \cot x \)
+\end{itemize}
+\end{multicols}
+\begin{multicols}{2}
+\begin{itemize}
+    \setstretch{3}
+    \item \( \displaystyle \left[ \ln\left(x + \sqrt{x^2 + 1}\right) \right]' = \frac{1}{\sqrt{x^2 + 1}} \)
+    \item \( \displaystyle \left[ \ln\left(x + \sqrt{x^2 - 1}\right) \right]' = \frac{1}{\sqrt{x^2 - 1}} \)
+\end{itemize}
+\end{multicols}
+
+\section{积分公式}
+
+$\displaystyle \int x^k \mathrm{d}x = \frac{1}{k+1} x^{k+1} + C, k \neq -1;$
+$\begin{cases}
+    \displaystyle \int \frac{1}{x^2} \mathrm{d}x = -\frac{1}{x} + C, \\
+    \displaystyle \int \frac{1}{\sqrt{x}} \mathrm{d}x = 2\sqrt{x} + C.
+\end{cases}$
+
+\vspace{1em}
+$\displaystyle \int \frac{1}{x} \mathrm{d}x = \ln|x| + C$. \quad \textcolor{blue}{$\to (\ln x)' = \frac{1}{x}$}
+
+\vspace{1em}
+$\displaystyle \int \mathrm{e}^x \mathrm{d}x = \mathrm{e}^x + C;$ \quad $\displaystyle \int a^x \mathrm{d}x = \frac{a^x}{\ln a} + C, a > 0 \text{ 且 } a \neq 1$.
+
+\vspace{1em}
+$\displaystyle \int \sin x \mathrm{d}x = -\cos x + C;$ \quad $\displaystyle \int \cos x \mathrm{d}x = \sin x + C;$
+
+$\displaystyle \int \tan x \mathrm{d}x = -\ln|\cos x| + C;$ \quad $\displaystyle \int \cot x \mathrm{d}x = \ln|\sin x| + C.$
+
+$\displaystyle \int \frac{\mathrm{d}x}{\cos x} = \int \sec x \mathrm{d}x = \ln|\sec x + \tan x| + C;$ \quad \textcolor{blue}{$\star$}
+
+$\displaystyle \int \frac{\mathrm{d}x}{\sin x} = \int \csc x \mathrm{d}x = \ln|\csc x - \cot x| + C;$
+
+$\displaystyle \int \sec^2 x \mathrm{d}x = \tan x + C;$ \quad $\displaystyle \int \csc^2 x \mathrm{d}x = -\cot x + C;$
+
+$\displaystyle \int \sec x \tan x \mathrm{d}x = \sec x + C;$ \quad $\displaystyle \int \csc x \cot x \mathrm{d}x = -\csc x + C.$
+
+\vspace{1em}
+$\begin{cases}
+    \displaystyle \int \frac{1}{1+x^2} \mathrm{d}x = \arctan x + C, \\
+    \displaystyle \int \frac{1}{a^2 + x^2} \mathrm{d}x = \frac{1}{a} \arctan \frac{x}{a} + C (a > 0).
+\end{cases}$
+
+\vspace{1em}
+$\begin{cases}
+    \displaystyle \int \frac{1}{\sqrt{1-x^2}} \mathrm{d}x = \arcsin x + C, \\
+    \displaystyle \int \frac{1}{\sqrt{a^2 - x^2}} \mathrm{d}x = \arcsin \frac{x}{a} + C (a > 0).
+\end{cases}$
+
+\vspace{1em}
+$\begin{cases}
+    \displaystyle \int \frac{1}{\sqrt{x^2 + a^2}} \mathrm{d}x = \ln(x + \sqrt{x^2 + a^2}) + C (\text{常见 } a=1), \\
+    \displaystyle \int \frac{1}{\sqrt{x^2 - a^2}} \mathrm{d}x = \ln|x + \sqrt{x^2 - a^2}| + C (|x| > |a|).
+\end{cases}$
+
+$\displaystyle \int \frac{1}{x^2 - a^2} \mathrm{d}x = \frac{1}{2a} \ln \left| \frac{x-a}{x+a} \right| + C$ \qquad
+$\displaystyle \int \frac{1}{a^2 - x^2} \mathrm{d}x = \frac{1}{2a} \ln \left| \frac{x+a}{x-a} \right| + C$.
+
+\vspace{1em}
+
+$\displaystyle \int \sqrt{a^2 - x^2} \mathrm{d}x = \frac{a^2}{2} \arcsin \frac{x}{a} + \frac{x}{2} \sqrt{a^2 - x^2} + C$ \qquad $(a > 0)$.
+
+\vspace{1em}
+
+$\displaystyle \int \sin^2 x \mathrm{d}x = \frac{x}{2} - \frac{\sin 2x}{4} + C$ \qquad ($\sin^2 x = \displaystyle \frac{1-\cos 2x}{2}$);
+
+$\displaystyle \int \cos^2 x \mathrm{d}x = \frac{x}{2} + \frac{\sin 2x}{4} + C$ \qquad ($\cos^2 x = \displaystyle \frac{1+\cos 2x}{2}$);
+
+$\displaystyle \int \tan^2 x \mathrm{d}x = \tan x - x + C$ \qquad ($\tan^2 x = \sec^2 x - 1$);
+
+$\displaystyle \int \cot^2 x \mathrm{d}x = -\cot x - x + C$ \qquad ($\cot^2 x = \csc^2 x - 1$).
+
+
+\section{反函数的二阶导数}
+
+在 $y=f(x)$ 单调，且二阶可导的情况下，若 $f'(x) \neq 0$，则存在反函数 $x = \phi(y)$，记 $f'(x) = y'_x$，
+$\phi'(y) = x'_y$，则有
+
+$$ y'_x = \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{1}{\frac{\mathrm{d}x}{\mathrm{d}y}} = \frac{1}{x'_y}, \qquad y''_{xx} = \frac{\mathrm{d}^2 y}{\mathrm{d}x^2} = -\frac{x''_{yy}}{(x'_y)^3} $$
+
+反过来，则有
+$$ x'_y = \frac{1}{y'_x} \text{，} \quad x''_{yy} = -\frac{y''_{xx}}{(y'_x)^3} $$
+
+% \section{斜渐近线}
+
+% 若 $k = \displaystyle \lim_{x \to +\infty} \frac{f(x)}{x}, b = \displaystyle \lim_{x \to +\infty} [f(x) - kx]$ (或 $k = \displaystyle \lim_{x \to -\infty} \frac{f(x)}{x}, b = \displaystyle \lim_{x \to -\infty} [f(x) - kx]$ )，则直线 $y = kx + b$ 是曲线 $y = f(x)$ 的斜渐近线.
+
+\section{莱布尼茨积分法则}
+
+\begin{note}
+使用变现积分求导公式，即 \(\displaystyle F'(x) = f(b(x)) \cdot b'(x) - f(a(x)) \cdot a'(x)\)，如果被积分函数是 \(\displaystyle f(x, t)\)，即既有 \(t\) 又有 \(x\)，是不可以直接使用。原因就是这里的莱布尼茨积分法则。
+\end{note}
+设含参变量 \(x\) 的积分 \(\displaystyle F(x) = \int_{a(x)}^{b(x)} f(x, t) dt\)，则其导数公式为：
+\begin{itemize}
+  \item 基础形式：\(\displaystyle F'(x) = \int_{a(x)}^{b(x)} \frac{\partial f(x, t)}{\partial x} dt + f(x, b(x)) \cdot b'(x) - f(x, a(x)) \cdot a'(x)\)
+  \item 若积分上下限 \(\displaystyle a, b\) 为常数，简化为 \(\displaystyle F'(x) = \int_{a}^{b} \frac{\partial f(x, t)}{\partial x} dt\)
+\end{itemize}
+
+
+
+
+\section{常用定理}
+
+% --- 定理 1-8 ---
+\begin{theorem}[有界与最值定理]
+    $m \le f(x) \le M$，其中 $m, M$ 分别为 $f(x)$ 在 $[a, b]$ 上的最小值与最大值。
+\end{theorem}
+
+\begin{theorem}[介值定理]
+    当 $m \le \mu \le M$ 时，存在 $\xi \in [a, b]$，使得 $f(\xi) = \mu$。
+\end{theorem}
+
+\begin{theorem}[平均值定理]
+    当 $a < x_1 < x_2 < \dots < x_n < b$ 时，在 $[x_1, x_n]$ 内至少存在一点 $\xi$，使得
+$$ f(\xi) = \frac{f(x_1) + f(x_2) + \dots + f(x_n)}{n} $$
+\end{theorem}
+
+\begin{theorem}[零点定理]
+ 当 $f(a) \cdot f(b) < 0$ 时，存在 $\xi \in (a, b)$，使得 $f(\xi) = 0$。
+\end{theorem}
+
+\begin{theorem}[费马定理]
+     $f(x)$ 在点 $x_0$ 处满足
+$\begin{cases}
+    \text{①可导,} \\
+    \text{②取极值,}
+\end{cases}$
+则 $f'(x_0) = 0$。
+\end{theorem}
+
+\begin{theorem}[罗尔定理]
+    设 $f(x)$ 满足
+$\begin{cases}
+    \text{①在 } [a, b] \text{ 上连续,} \\
+    \text{②在 } (a, b) \text{ 内可导,} \\
+    \text{③} f(a) = f(b),
+\end{cases}$\\
+则存在 $\xi \in (a, b)$，使得 $f'(\xi) = 0$。
+\end{theorem}
+
+\begin{theorem}[拉格朗日中值定理]
+    设 $f(x)$ 满足
+$\begin{cases}
+    \text{①在 } [a, b] \text{ 上连续,} \\
+    \text{②在 } (a, b) \text{ 内可导,}
+\end{cases}$
+则存在 $\xi \in (a, b)$，使得
+$$ f(b) - f(a) = \underbrace{f'(\xi)}_{\text{\textcolor{blue}{变化率}}} \underbrace{(b-a)}_{\text{\textcolor{blue}{定值}}}, $$
+或者写成
+$$ f'(\xi) = \frac{f(b) - f(a)}{b-a} $$
+\end{theorem}
+
+\begin{theorem}[柯西中值定理]
+设 $f(x), g(x)$ 满足
+$\begin{cases}
+    \text{①在 } [a, b] \text{ 上连续,} \\
+    \text{②在 } (a, b) \text{ 内可导,} \\
+    \text{③} g'(x) \neq 0,
+\end{cases}$
+则存在 $\xi \in (a, b)$，使得
+$$ \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)} \quad (\text{\textcolor{blue}{同一个 $\xi \to$ "参数方程"}}) $$
+\end{theorem}
+
+
+
+
+\end{document}
