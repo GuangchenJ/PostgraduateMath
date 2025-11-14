@@ -511,6 +511,64 @@ $\tan, \sec, \cot, \csc$ & \textbf{毕达哥拉斯恒等式} &
 \problem[P89-变式2 (99-1)]{设 $\displaystyle y=y(x)$, $\displaystyle z=z(x)$ 是由方程 $\displaystyle z=xf(x+y)$ 和 $\displaystyle F(x,y,z)=0$ 所确定的函数, 其中 $\displaystyle f$ 和 $\displaystyle F$ 分别具有一阶连续导数和一阶连续偏导数, 求 $\displaystyle \frac{\mathrm{d}z}{\mathrm{d}x}$.}
 \vspace{-5em}
 \ansat{292；【十年真题】 - 考点二：多元隐函数的偏导数与全微分的计算 - 变式2}
+\vspace{-5em}
+
+\subsection{什么时候用克拉默法则？}
+
+\begin{itemize}
+  \item 方程个数 = 未知数个数；也就是矩阵系数必须是一个方阵，并且系数行列式 \(\neq = 0\).
+\end{itemize}
+
+一般形如下方程组（\(2 \times 2\) 或 \(3 \times 3\)）：
+
+\begin{minipage}[c]{0.3\textwidth}
+\[ \begin{cases}
+  ax + by = e \\
+  cx + dy = f
+  \end{cases} \]
+\end{minipage}
+\begin{minipage}[c]{0.5\textwidth}
+\[ \begin{cases}
+ax + by + cz = g \\
+dx + ey + fz = h
+\end{cases} \]
+\end{minipage}
+
+\(4 \times 4\) 以上的一般不用，这里面的 \(\left( x, y, z \right)\) 就是求解的目标，在之前的例子中就是 \(\frac{\mathrm{d} z}{ \mathrm{d} x}\) 之类的东西，把这种东西看成需要求解的 \(x\) 或 \(y\)，就可以直接使用克拉默法则了。
+
+\section{注意函数中的范围和特殊点}
+
+注意三道题：
+
+\problem[李武六-3-19]{计算 $\displaystyle \int_{\mathrm{e}^{-n\pi}}^1 \left| \left[\cos\left(\ln \frac{1}{x}\right)\right]' \right| \ln \frac{1}{x} \, \mathrm{d}x$, 其中 $\displaystyle n$ 为正整数.}
+
+\problem[张八-1-13]{设 $\displaystyle \mathrm{e}^{ax} \ge 1+x$ 对任意实数 $\displaystyle x$ 均成立, 则 $\displaystyle a$ 的取值范围为 \underline{\hspace{4em}}.}
+
+\problem[P105-9 (21-2)]{设平面区域 $\displaystyle D$ 由曲线 $\displaystyle \left( x^2 + y^2 \right)^2 = x^2 - y^2$ ($\displaystyle x \ge 0, y \ge 0$) 与 $\displaystyle x$ 轴围成, 计算二重积分 $\displaystyle \iint_D xy \, \mathrm{d}x \, \mathrm{d}y.$}
+\vspace{-5em}
+\ansat{303；【十年真题】 - 考点二：二重积分的计算 - 9}
+
+
+
+通常，在以下几种情况中，你需要高度警惕“隐藏条件”，即范围和特殊点：
+\begin{itemize}
+  \item 对数函数：$\ln(f(x)) \implies$ 必须满足 $f(x) > 0$。
+  \item 偶次根式： $\sqrt{f(x)} \implies$ 必须满足 $f(x) \ge 0$。
+  \item 值域：平方 $r^2 \ge 0$，有关指数的计算：$\mathrm{e}^{-nx}$，有关对数在不同区间上的计算 \((0, 1)\) 和 \((1. \infty)\)；三角函数的周期性等。
+  \item 公共点、特殊点，例如 $0, \pm 1, \mathrm{e}, \frac{1}{\mathrm{e}}$
+\end{itemize}
+
+直角坐标转极坐标的关键词：
+\begin{itemize}
+  \item $x^2+y^2 \implies$ 极坐标的 $r^2$
+  \item $x^2-y^2 \implies$ 极坐标的 $r^2 \cos(2\theta)$
+  \item $xy \implies$ 极坐标的 $r^2 \cos\theta \sin\theta$
+  \item $\mathrm{d}x \mathrm{d}y \implies r \mathrm{d}r \mathrm{d}\theta$
+\end{itemize}
+
+注意异常复杂表达式中反复出现的部分，进行换元（参考第一道题）；
+同时注意积分区间的奇偶性。
+%  * 如处理“恒成立”的不等式时：如题目 13： 设 $e^{ax} \ge 1 + x$ 对任意实数 $x$ 均成立。这类“恒成立”问题，关键就在于找到那个“临界点”或“特殊点”。这里的“隐藏条件”就是去寻找一个**“公共点”**。遇到不熟悉的或复杂的曲线方程时：如题目 9： 曲线 $(x^2 + y^2)^2 = x^2 - y^2$。在直角坐标系下，这个方程所表示的区域 $D$ 几乎无法进行积分。这种形式本身就是一个强烈的信号：“请换坐标系！”这里的“隐藏条件”就是方程的形式（充满了 $x^2+y^2$, $x^2-y^2$ 这种项）强烈暗示了极坐标是解题的钥匙。
 
 
 % \chapter{错题}
