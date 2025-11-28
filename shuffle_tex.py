@@ -91,10 +91,10 @@ if __name__ == "__main__":
 
     # 1. 设置包含 .tex 错题文件的目标文件夹
     #    (使用正斜杠 / 作为路径分隔符)
-    TARGET_DIRECTORY = "./zonghecuoti/1116"
+    TARGET_DIRECTORY = "./zonghecuoti/wrong"
 
     # 2. 设置输出的文件名
-    OUTPUT_FILENAME = "./zonghecuoti/1116/all_shuffled_problems.tex"
+    OUTPUT_FILENAME = "./zonghecuoti/1128/all_shuffled_problems.tex"
 
     # -------------------------------------------------
 
